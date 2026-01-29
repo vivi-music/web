@@ -1,10 +1,10 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-
-// Importiert UnoCSS (wichtig für die Styles in deinen Komponenten)
-import 'virtual:uno.css'
-
-// Importiert deine globalen Styles (falls vorhanden, z.B. für Body-Background)
 import './assets/css/base.css'
+import 'virtual:uno.css'
+import App from './App.vue'
+import i18n from './i18n' // <--- Importieren
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+app.use(i18n) // <--- Plugin nutzen
+app.mount('#app')
