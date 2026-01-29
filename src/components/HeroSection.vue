@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useTilt } from '../composables/useTilt'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const phoneRef = ref(null)
 useTilt(phoneRef)
 </script>
@@ -11,21 +13,24 @@ useTilt(phoneRef)
     <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div class="z-10">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-6">
-          <div class="i-fa6-solid-code-commit"></div> v5.0.3-testing
+          <div class="i-fa6-solid-code-commit"></div> {{ t('hero.tagline') }}
         </div>
-        <h1 class="text-6xl md:text-7xl font-bold leading-tight mb-6">
-          Music, <br>
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-tertiary">Unleashed.</span>
+        
+        <h1 class="text-6xl md:text-7xl font-bold leading-tight mb-6 text-text">
+          {{ t('hero.title') }} <br>
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-tertiary">{{ t('hero.subtitle') }}</span>
         </h1>
-        <p class="text-xl text-white/60 mb-8 max-w-lg leading-relaxed">
-          Der Open-Source Android Player mit <b>Innertube</b> Integration, synchronen Lyrics und Material 3 Expressive Design.
+        
+        <p class="text-xl text-textDim mb-8 max-w-lg leading-relaxed">
+          {{ t('hero.description') }}
         </p>
+        
         <div class="flex flex-wrap gap-4">
           <a href="#install" class="btn-primary">
-            <div class="i-fa6-brands-android text-lg"></div> Download App
+            <div class="i-fa6-brands-android text-lg"></div> {{ t('hero.btn_download') }}
           </a>
           <a href="#features" class="btn-secondary">
-            <div class="i-fa6-solid-layer-group"></div> View Features
+            <div class="i-fa6-solid-layer-group"></div> {{ t('hero.btn_features') }}
           </a>
         </div>
       </div>
