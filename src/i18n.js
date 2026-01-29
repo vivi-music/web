@@ -1,11 +1,11 @@
 /**
  * Internationalisierungskonfiguration (i18n).
- * Enthält Übersetzungen für Deutsch (de) und Englisch (en)
- * für alle Sektionen der Landing Page.
+ * Enthält Übersetzungen für Deutsch (de) und Englisch (en).
  */
 import { createI18n } from 'vue-i18n'
 
 const messages = {
+  // ... (Hier bleiben deine existierenden Übersetzungen unverändert) ...
   en: {
     nav: {
       features: 'Features',
@@ -178,11 +178,11 @@ const messages = {
 
 /**
  * i18n Instanz erstellen.
- * Konfiguriert Standardsprache und Fallback.
+ * FIX: Default Locale auf 'en' geändert.
  */
 const i18n = createI18n({
-  legacy: false, // Composition API Modus
-  locale: 'de', // Standardmäßig Deutsch
+  legacy: false,
+  locale: 'en', // <--- Standard auf Englisch
   fallbackLocale: 'en',
   messages
 })
