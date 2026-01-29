@@ -6,12 +6,12 @@ This guide explains how to deploy the Vivi Music Website (Vue.js/Vite) to your G
 
 Determine which URL format your site will use:
 
-1.  **Main Organization Site:** `https://vivimusic-app-team.github.io/`  
-    * Repository Name: `vivimusic-app-team.github.io`
+1.  **Main Organization Site:** `https://vivi-music.github.io/`  
+    * Repository Name: `https://vivi-music.github.io`
     * **Base Path:** `/`
-2.  **Project Site:** `https://vivimusic-app-team.github.io/webpage/`  
-    * Repository Name: `webpage` (or similar)
-    * **Base Path:** `/webpage/`
+2.  **Project Site:** `https://vivi-music.github.io/web/`  
+    * Repository Name: `web` (or similar)
+    * **Base Path:** `/web/`
 
 ---
 
