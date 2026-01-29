@@ -45,7 +45,7 @@ const { currentTheme, thumbPosition, setTheme } = useTheme()
           </button>
         </div>
 
-        <a href="https://github.com/vivimusic-app-team/web" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full text-textDim hover:text-text hover:bg-text/5 transition-all active:scale-95">
+        <a href="https://github.com/vivi-music/web" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full text-textDim hover:text-text hover:bg-text/5 transition-all active:scale-95">
           <div class="i-fa6-brands-github text-xl"></div>
         </a>
       </div>
