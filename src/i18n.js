@@ -1,7 +1,8 @@
 /**
  * @file i18n.js
- * @description Internationalisierungskonfiguration (i18n) für Vivi Music.
- * Beinhaltet Übersetzungen für Deutsch (de) und Englisch (en) sowie Accessibility-Labels.
+ * @description Internationalisierungskonfiguration für Vivi Music.
+ * Enthält Übersetzungen für Deutsch (de) und Englisch (en) inklusive neuer Features.
+ * @module i18n
  */
 import { createI18n } from 'vue-i18n'
 
@@ -49,6 +50,18 @@ const messages = {
       cache: {
         title: 'Smart Caching',
         desc: 'Intelligent caching strategy to save data and enable offline playback.'
+      },
+      equalizer: {
+        title: 'Audio Precision',
+        desc: 'Fine-tune your listening experience with a built-in equalizer and advanced audio effects.'
+      },
+      material: {
+        title: 'Material 3 Design',
+        desc: 'Experience fluid animations and dynamic colors with the latest Material You expressive design.'
+      },
+      privacy: {
+        title: 'Private by Design',
+        desc: 'No tracking, no telemetry. Your listening habits stay on your device where they belong.'
       }
     },
     showcase: {
@@ -66,7 +79,19 @@ const messages = {
       },
       btn_izzy: 'Get it on IzzyOnDroid',
       btn_github: 'View Assets',
-      safety_note: 'Verified & Secure APKs'
+      safety_note: 'Verified & Secure APKs',
+      step1: {
+        title: 'Download',
+        desc: 'Pick a source above and download the latest APK file to your Android device.'
+      },
+      step2: {
+        title: 'Settings',
+        desc: 'If prompted, allow your browser or file manager to install apps from unknown sources.'
+      },
+      step3: {
+        title: 'Launch',
+        desc: 'Open the downloaded file, tap install, and enjoy your music with Vivi.'
+      }
     },
     contribute: {
       title: 'Contribute',
@@ -137,6 +162,18 @@ const messages = {
       cache: {
         title: 'Intelligentes Caching',
         desc: 'Intelligente Caching-Strategie zum Datensparen und für Offline-Wiedergabe.'
+      },
+      equalizer: {
+        title: 'Audio-Präzision',
+        desc: 'Verfeinere dein Hörerlebnis mit einem integrierten Equalizer und fortschrittlichen Audio-Effekten.'
+      },
+      material: {
+        title: 'Material 3 Design',
+        desc: 'Erlebe flüssige Animationen und dynamische Farben mit dem neuesten Material You Design.'
+      },
+      privacy: {
+        title: 'Privatsphäre zuerst',
+        desc: 'Kein Tracking, keine Telemetrie. Dein Hörverhalten bleibt genau dort, wo es hingehört: auf deinem Gerät.'
       }
     },
     showcase: {
@@ -154,7 +191,19 @@ const messages = {
       },
       btn_izzy: 'Bei IzzyOnDroid laden',
       btn_github: 'Assets ansehen',
-      safety_note: 'Verifizierte & Sichere APKs'
+      safety_note: 'Verifizierte & Sichere APKs',
+      step1: {
+        title: 'Herunterladen',
+        desc: 'Wähle eine Quelle oben und lade die aktuellste APK-Datei auf dein Android-Gerät.'
+      },
+      step2: {
+        title: 'Einstellungen',
+        desc: 'Falls gefragt, erlaube deinem Browser oder Dateimanager die Installation aus unbekannten Quellen.'
+      },
+      step3: {
+        title: 'Starten',
+        desc: 'Öffne die Datei, tippe auf Installieren und genieße deine Musik mit Vivi.'
+      }
     },
     contribute: {
       title: 'Mitwirken',
@@ -184,10 +233,6 @@ const messages = {
   }
 }
 
-/**
- * Erstellung der i18n-Instanz.
- * Standardmäßig auf Englisch (en) eingestellt.
- */
 const i18n = createI18n({
   legacy: false,
   locale: 'en',

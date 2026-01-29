@@ -12,15 +12,15 @@
   --c-bg: #0f0d13;
   --c-text-rgb: 230, 225, 229;     /* #E6E1E5 */
   --c-text-dim-rgb: 202, 196, 208; /* #CAC4D0 */
-  
+
   --c-primary-rgb: 208, 188, 255;  /* #D0BCFF */
   --c-on-primary-rgb: 56, 30, 114; /* #381E72 */
-  
+
   /* Surface Tones für M3 */
   --c-surface-rgb: 20, 18, 24;           /* #141218 */
   --c-surface-container-rgb: 30, 28, 36; /* #1E1C24 */
   --c-surface-variant-rgb: 73, 69, 79;   /* #49454F */
-  
+
   --c-border-rgb: 147, 143, 153; /* Outline Color */
 }
 
@@ -29,18 +29,18 @@ html.light {
   --c-bg: #fdf7ff;
   --c-text-rgb: 29, 27, 32;        /* #1d1b20 */
   --c-text-dim-rgb: 73, 69, 79;    /* #49454F */
-  
+
   --c-primary-rgb: 103, 80, 164;   /* #6750A4 */
   --c-on-primary-rgb: 255, 255, 255; /* #FFFFFF */
-  
+
   --c-surface-rgb: 253, 247, 255;        /* #fdf7ff */
   --c-surface-container-rgb: 243, 237, 247; /* #f3edf7 */
   --c-surface-variant-rgb: 231, 224, 236;   /* #e7e0ec */
-  
+
   --c-border-rgb: 121, 116, 126;
 }
 
-/* Variablen Zuweisung mit RGB-Fallback für normale Nutzung */
+/* Variablen Zuweisung */
 :root {
   --c-text: rgb(var(--c-text-rgb));
   --c-text-dim: rgb(var(--c-text-dim-rgb));
@@ -58,6 +58,22 @@ body {
   font-family: "Plus Jakarta Sans", sans-serif;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- ERGÄNZUNGEN FÜR LAYOUT-KOMPONENTEN --- */
+
+/* Fix für hässliche Browser-Standard-Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Material 3 Section Titles */
+.section-title {
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--c-text);
 }
 
 /* Scrollbar */
@@ -65,5 +81,11 @@ body {
 ::-webkit-scrollbar-track { background: var(--c-surface); }
 ::-webkit-scrollbar-thumb { background: var(--c-surface-variant); border-radius: 3px; }
 
+/* 3D Effekte für Screenshots */
 .perspective-1000 { perspective: 1000px; }
 .transform-style-3d { transform-style: preserve-3d; }
+
+/* Hilfsklassen für UnoCSS Fallbacks */
+.bg-primary { background-color: var(--c-primary); }
+.text-primary { color: var(--c-primary); }
+.bg-surface-container { background-color: var(--c-surface-container); }
