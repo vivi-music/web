@@ -1,26 +1,24 @@
 <script setup>
-/**
- * Zeigt die Hauptfeatures der App in einem Grid-Layout an.
- * Nutzt UnoCSS Icons (i-fa6-*) statt FontAwesome Klassen.
- */
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 </script>
 
 <template>
-  <section id="features" class="py-24 bg-surfaceContainer/50 border-y border-white/5">
+  <section id="features" class="py-24 bg-surfaceContainer/50 border-y border-border">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid lg:grid-cols-3 gap-12">
         
         <div class="lg:col-span-1 space-y-2">
-          <h2 class="section-title">Engineered for <span class="text-primary">Performance</span></h2>
-          <p class="text-white/60">
-            Vivi Music kombiniert lokale Musikbibliotheken mit der Power von YouTube Music (Innertube).
+          <h2 class="section-title">{{ t('features.title_part1') }} <span class="text-primary">{{ t('features.title_part2') }}</span></h2>
+          <p class="text-textDim">
+            {{ t('features.description') }}
           </p>
           
-          <div class="mt-8 p-6 rounded-2xl bg-black/40 border border-white/5">
-            <h4 class="font-bold mb-4 flex items-center gap-2">
-              <div class="i-fa6-solid-server text-accent"></div> Architecture
+          <div class="mt-8 p-6 rounded-2xl bg-surface border border-border">
+            <h4 class="font-bold mb-4 flex items-center gap-2 text-text">
+              <div class="i-fa6-solid-server text-accent"></div> {{ t('features.architecture') }}
             </h4>
-            <ul class="space-y-3 text-sm text-gray-400 font-mono">
+            <ul class="space-y-3 text-sm text-textDim font-mono">
               <li>> MVVM Pattern (Jetpack Compose)</li>
               <li>> Single Activity (MainActivity.kt)</li>
               <li>> Room Database (MusicDatabase)</li>
@@ -35,9 +33,9 @@
             <div class="w-12 h-12 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
               <div class="i-fa6-brands-youtube text-2xl"></div>
             </div>
-            <h3 class="text-xl font-bold mb-2">Innertube Client</h3>
-            <p class="text-sm text-white/60">
-              Direkter API-Zugriff auf `YouTubeRepository`. Streamt Audio in Opus/AAC ohne Werbung. Unterstützt "Mix", "Charts" und "New Releases".
+            <h3 class="text-xl font-bold mb-2 text-text">{{ t('features.innertube.title') }}</h3>
+            <p class="text-sm text-textDim">
+              {{ t('features.innertube.desc') }}
             </p>
           </div>
 
@@ -45,9 +43,9 @@
             <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
               <div class="i-fa6-solid-microphone-lines text-2xl"></div>
             </div>
-            <h3 class="text-xl font-bold mb-2">BetterLyrics</h3>
-            <p class="text-sm text-white/60">
-              Multi-Source Lyrics Engine (`BetterLyricsLyricsProvider`). Fetcht synchrone Texte von LRCLib, Musixmatch und KuGou.
+            <h3 class="text-xl font-bold mb-2 text-text">{{ t('features.lyrics.title') }}</h3>
+            <p class="text-sm text-textDim">
+               {{ t('features.lyrics.desc') }}
             </p>
           </div>
 
@@ -55,9 +53,9 @@
             <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
               <div class="i-fa6-brands-discord text-2xl"></div>
             </div>
-            <h3 class="text-xl font-bold mb-2">Kizzy RPC</h3>
-            <p class="text-sm text-white/60">
-              Integrierter Discord Rich Presence Client (`KizzyRPC.kt`). Zeigt Song, Künstler und Album-Cover live in deinem Discord-Profil an.
+            <h3 class="text-xl font-bold mb-2 text-text">{{ t('features.rpc.title') }}</h3>
+            <p class="text-sm text-textDim">
+               {{ t('features.rpc.desc') }}
             </p>
           </div>
 
@@ -65,9 +63,9 @@
             <div class="w-12 h-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
               <div class="i-fa6-solid-cloud-arrow-down text-2xl"></div>
             </div>
-            <h3 class="text-xl font-bold mb-2">Smart Cache</h3>
-            <p class="text-sm text-white/60">
-              `ExoDownloadService` sorgt für nahtloses Caching. Songs werden automatisch gecacht, um Datenvolumen zu sparen.
+            <h3 class="text-xl font-bold mb-2 text-text">{{ t('features.cache.title') }}</h3>
+            <p class="text-sm text-textDim">
+               {{ t('features.cache.desc') }}
             </p>
           </div>
 
