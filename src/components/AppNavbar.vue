@@ -1,11 +1,19 @@
 <script setup>
 import { useTheme } from '../composables/useTheme'
+import { useI18n } from 'vue-i18n'
+
 const { currentTheme, thumbPosition, setTheme } = useTheme()
+const { t, locale } = useI18n()
+
+// Einfacher Toggle zwischen DE und EN
+const toggleLang = () => {
+  locale.value = locale.value === 'en' ? 'de' : 'en'
+}
 </script>
 
 <template>
-  <nav class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-surface/60 border-b border-border transition-all duration-500">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+  <nav class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-surface/80 border-b border-border transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
       
       <a href="#" class="flex items-center gap-4 group select-none">
         <img 
@@ -16,16 +24,28 @@ const { currentTheme, thumbPosition, setTheme } = useTheme()
         <span class="font-bold text-xl tracking-tight text-text group-hover:text-primary transition-colors">Vivi Music</span>
       </a>
 
-      <div class="hidden md:flex items-center gap-1">
-        <a href="#features" class="nav-item">Features</a>
-        <a href="#screenshots" class="nav-item">Screenshots</a>
-        <a href="#install" class="nav-item">Install</a>
-        <a href="#contribute" class="nav-item">Contribute</a>
+      <div class="hidden md:flex items-center gap-3">
+        <a href="#features" class="nav-btn">
+          {{ t('nav.features') }}
+        </a>
+        <a href="#screenshots" class="nav-btn">
+          {{ t('nav.screenshots') }}
+        </a>
+        <a href="#install" class="nav-btn">
+          {{ t('nav.install') }}
+        </a>
+        <a href="#contribute" class="nav-btn-filled">
+          {{ t('nav.contribute') }}
+        </a>
       </div>
 
       <div class="flex items-center gap-3">
         
-        <div class="bg-surfaceContainer/50 rounded-full relative w-[96px] h-[40px] flex items-center justify-between px-1 border border-border">
+        <button @click="toggleLang" class="h-10 px-4 rounded-full border border-border text-xs font-bold text-textDim hover:text-text hover:bg-surfaceVariant transition-all uppercase tracking-wide">
+          {{ locale }}
+        </button>
+
+        <div class="bg-surfaceContainer rounded-full relative w-[96px] h-[40px] flex items-center justify-between px-1 border border-border">
           <div class="absolute top-[4px] left-[4px] w-[32px] h-[32px] bg-primary rounded-full transition-transform duration-300 z-10 shadow-[0_2px_8px_rgba(var(--c-primary-rgb),0.3)]"
                :style="{ transform: `translateX(${thumbPosition}px)` }"></div>
           
@@ -33,19 +53,17 @@ const { currentTheme, thumbPosition, setTheme } = useTheme()
             :class="currentTheme === 'light' ? 'text-onPrimary' : 'text-textDim'">
             <div class="i-fa6-solid-sun text-xs"></div>
           </button>
-          
           <button @click="setTheme('system', 28)" class="switch-btn" 
             :class="currentTheme === 'system' ? 'text-onPrimary' : 'text-textDim'">
             <div class="i-fa6-solid-circle-half-stroke text-xs"></div>
           </button>
-          
           <button @click="setTheme('dark', 56)" class="switch-btn" 
             :class="currentTheme === 'dark' ? 'text-onPrimary' : 'text-textDim'">
             <div class="i-fa6-solid-moon text-xs"></div>
           </button>
         </div>
 
-        <a href="https://github.com/vivi-music/web" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full text-textDim hover:text-text hover:bg-text/5 transition-all active:scale-95">
+        <a href="https://github.com/vivimusic-app-team/web" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full text-textDim hover:text-text hover:bg-surfaceVariant transition-all active:scale-95">
           <div class="i-fa6-brands-github text-xl"></div>
         </a>
       </div>
@@ -54,16 +72,19 @@ const { currentTheme, thumbPosition, setTheme } = useTheme()
 </template>
 
 <style scoped>
-.nav-item {
-  @apply px-5 py-2.5 rounded-full text-sm font-semibold text-textDim transition-all duration-300 relative overflow-hidden;
+/* M3E "Tonal Button" Style für Navigation 
+  - Subtiler Hintergrund (Surface Variant)
+  - Abgerundet (Pill)
+  - Hover: Mehr Kontrast
+*/
+.nav-btn {
+  @apply px-6 py-2.5 rounded-full text-sm font-semibold text-textDim bg-surfaceContainer border border-transparent transition-all duration-300 hover:bg-surfaceVariant hover:text-text hover:border-border active:scale-95;
 }
 
-.nav-item:hover {
-  @apply text-primary bg-text/5;
-}
-
-.nav-item:active {
-  @apply scale-95 bg-text/10;
+/* Hervorgehobener "Filled" Style für Call-to-Action (z.B. Contribute) 
+*/
+.nav-btn-filled {
+  @apply px-6 py-2.5 rounded-full text-sm font-bold text-onPrimary bg-primary shadow-lg shadow-primary/20 transition-all duration-300 hover:opacity-90 hover:shadow-primary/40 active:scale-95;
 }
 
 .switch-btn {
