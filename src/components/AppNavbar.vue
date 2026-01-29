@@ -45,8 +45,9 @@ onMounted(() => {
 
       <a href="#" class="flex items-center gap-4 group select-none decoration-none" @click="setActive('')">
         <img
-            src="/assets/Logo.png"
-            alt="Vivi Music"
+            src="/assets/LogoSmall.png"
+            alt=""
+            aria-hidden="true"
             class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500 ease-out"
         />
         <span class="font-bold text-xl tracking-tight text-text group-hover:text-primary transition-colors">Vivi Music</span>
@@ -98,7 +99,8 @@ onMounted(() => {
       <div class="flex items-center gap-3">
 
         <button @click="toggleLang"
-                class="h-10 px-4 rounded-full bg-surfaceContainer border border-primary/20 text-primary hover:bg-surfaceVariant transition-all flex items-center gap-2 group active:scale-95 cursor-pointer decoration-none">
+                class="h-10 px-4 rounded-full bg-surfaceContainer border border-primary/20 text-primary hover:bg-surfaceVariant transition-all flex items-center gap-2 group active:scale-95 cursor-pointer decoration-none"
+                :aria-label="t('nav.language')">
           <div class="i-fa6-solid-earth-americas text-base group-hover:scale-110 transition-transform"></div>
           <span class="text-xs font-bold uppercase tracking-wide">{{ locale }}</span>
         </button>
@@ -109,25 +111,29 @@ onMounted(() => {
 
           <button @click="setTheme('light', 0)"
                   class="flex-1 h-full flex items-center justify-center z-20 cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none"
-                  :class="currentTheme === 'light' ? 'text-onPrimary' : 'text-text/60 hover:text-text'">
+                  :class="currentTheme === 'light' ? 'text-onPrimary' : 'text-text/60 hover:text-text'"
+                  :aria-label="t('nav.theme.light')">
             <div class="i-fa6-solid-sun text-sm transition-transform active:scale-90"></div>
           </button>
 
           <button @click="setTheme('system', 32)"
                   class="flex-1 h-full flex items-center justify-center z-20 cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none"
-                  :class="currentTheme === 'system' ? 'text-onPrimary' : 'text-text/60 hover:text-text'">
+                  :class="currentTheme === 'system' ? 'text-onPrimary' : 'text-text/60 hover:text-text'"
+                  :aria-label="t('nav.theme.system')">
             <div class="i-fa6-solid-circle-half-stroke text-sm transition-transform active:scale-90"></div>
           </button>
 
           <button @click="setTheme('dark', 64)"
                   class="flex-1 h-full flex items-center justify-center z-20 cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none"
-                  :class="currentTheme === 'dark' ? 'text-onPrimary' : 'text-text/60 hover:text-text'">
+                  :class="currentTheme === 'dark' ? 'text-onPrimary' : 'text-text/60 hover:text-text'"
+                  :aria-label="t('nav.theme.dark')">
             <div class="i-fa6-solid-moon text-sm transition-transform active:scale-90"></div>
           </button>
         </div>
 
         <a href="https://github.com/vivimusic-app-team/web" target="_blank"
-           class="w-10 h-10 flex items-center justify-center rounded-full text-text/60 hover:text-text hover:bg-surfaceVariant transition-all active:scale-95 decoration-none">
+           class="w-10 h-10 flex items-center justify-center rounded-full text-text/60 hover:text-text hover:bg-surfaceVariant transition-all active:scale-95 decoration-none"
+           :aria-label="t('nav.theme.github')">
           <div class="i-fa6-brands-github text-xl"></div>
         </a>
       </div>

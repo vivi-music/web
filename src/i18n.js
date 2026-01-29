@@ -5,14 +5,20 @@
 import { createI18n } from 'vue-i18n'
 
 const messages = {
-  // ... (Hier bleiben deine existierenden Übersetzungen unverändert) ...
   en: {
     nav: {
       features: 'Features',
       screenshots: 'Screenshots',
       install: 'Install',
       contribute: 'Contribute',
-      language: 'Language'
+      language: 'Language',
+      // Accessibility Labels Navbar
+      theme: {
+        light: 'Switch to Light Mode',
+        system: 'Switch to System Mode',
+        dark: 'Switch to Dark Mode',
+        github: 'Visit Web Repository'
+      }
     },
     hero: {
       tagline: 'v5.0.3-testing',
@@ -87,7 +93,13 @@ const messages = {
     },
     footer: {
       license: 'Licensed under GPL v3.0',
-      based_on: 'Based on the open-source Vivi Music Android project.'
+      based_on: 'Based on the open-source Vivi Music Android project.',
+      // Accessibility Labels Footer
+      social: {
+        discord: 'Join our Discord Server',
+        telegram: 'Join our Telegram Channel',
+        github: 'Visit GitHub Organization'
+      }
     }
   },
   de: {
@@ -96,7 +108,14 @@ const messages = {
       screenshots: 'Vorschau',
       install: 'Installieren',
       contribute: 'Mitwirken',
-      language: 'Sprache'
+      language: 'Sprache',
+      // Accessibility Labels Navbar
+      theme: {
+        light: 'Zu hellem Design wechseln',
+        system: 'Zu System-Design wechseln',
+        dark: 'Zu dunklem Design wechseln',
+        github: 'Web Repository besuchen'
+      }
     },
     hero: {
       tagline: 'v5.0.3-testing',
@@ -171,18 +190,23 @@ const messages = {
     },
     footer: {
       license: 'Lizenziert unter GPL v3.0',
-      based_on: 'Basierend auf dem Open-Source Vivi Music Android Projekt.'
+      based_on: 'Basierend auf dem Open-Source Vivi Music Android Projekt.',
+      // Accessibility Labels Footer
+      social: {
+        discord: 'Unserem Discord Server beitreten',
+        telegram: 'Unserem Telegram Kanal beitreten',
+        github: 'GitHub Organisation besuchen'
+      }
     }
   }
 }
 
 /**
  * i18n Instanz erstellen.
- * FIX: Default Locale auf 'en' geändert.
  */
 const i18n = createI18n({
   legacy: false,
-  locale: 'en', // <--- Standard auf Englisch
+  locale: 'de',
   fallbackLocale: 'en',
   messages
 })
