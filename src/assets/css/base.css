@@ -1,3 +1,5 @@
+/* src/assets/css/base.css */
+
 /* GLOBAL RESET */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -6,9 +8,9 @@
 }
 
 :root {
-  /* --- Dark Mode (Standard) --- */
+  /* --- DARK MODE (Standard) --- */
   --c-bg: #0f0d13;
-  --c-text: #E6E1E5;
+  --c-text: #E6E1E5;               /* Hellgrau/Weiß */
   --c-text-dim: rgba(230, 225, 229, 0.6);
   
   --c-primary: #D0BCFF;
@@ -21,35 +23,35 @@
   --c-border: rgba(255, 255, 255, 0.1);
 }
 
+/* --- LIGHT MODE (Wird aktiv, wenn class="light" im HTML tag ist) --- */
 html.light {
-  /* --- Light Mode (Material 3 Purple) --- */
-  --c-bg: #fdf7ff;
-  --c-text: #1d1b20;
+  --c-bg: #fdf7ff;                 /* Sehr helles Lila/Weiß */
+  --c-text: #1d1b20;               /* Fast Schwarz */
   --c-text-dim: rgba(29, 27, 32, 0.6);
   
-  --c-primary: #6750A4;       /* Dunkleres Lila für guten Kontrast auf Weiß */
+  --c-primary: #6750A4;            /* Dunkleres Lila für Kontrast */
   --c-on-primary: #FFFFFF;
   
   --c-surface: #fdf7ff;
-  --c-surface-container: #f3edf7; /* Helles Flieder-Grau */
+  --c-surface-container: #f3edf7;  /* Helles Lila-Grau */
   --c-surface-variant: #e7e0ec;
   
   --c-border: rgba(0, 0, 0, 0.1);
 }
 
-/* Scrollbar Styles */
+/* Base Styles */
+body {
+  background-color: var(--c-bg);
+  color: var(--c-text);            /* Hier wird die Farbe automatisch zugewiesen */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--c-surface); }
 ::-webkit-scrollbar-thumb { background: var(--c-surface-variant); border-radius: 3px; }
 
-body {
-  background-color: var(--c-bg);
-  color: var(--c-text);
-  font-family: "Plus Jakarta Sans", sans-serif;
-  overflow-x: hidden;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-/* Utilities */
 .perspective-1000 { perspective: 1000px; }
 .transform-style-3d { transform-style: preserve-3d; }
