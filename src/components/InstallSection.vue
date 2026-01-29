@@ -1,76 +1,87 @@
 <script setup>
+/**
+ * @file InstallSection.vue
+ * @description Sektion für Download-Optionen.
+ * Nutzt das lokale IzzyOnDroid-Logo für maximale Stabilität.
+ */
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
+
+/** @constant {string} IZZY_URL - Link zum IzzyOnDroid Repository */
+const IZZY_URL = 'https://apt.izzysoft.de/fdroid/index/apk/com.vivi.vivimusic'
+
+/** @constant {string} GITHUB_URL - Link zu den GitHub Releases */
+const GITHUB_URL = 'https://github.com/vivizzz007/vivi-music/releases'
 </script>
 
 <template>
-  <section id="install" class="py-24 bg-surfaceContainer border-y border-border">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
-      
-      <div>
-        <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 text-text">
-          <div class="i-fa6-brands-android text-primary"></div>
-          {{ t('install.title') }}
-        </h2>
-        <div class="space-y-8">
-          <div class="flex gap-4">
-            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-onPrimary font-bold flex-shrink-0">1</div>
-            <div>
-              <h4 class="font-bold text-lg text-text">{{ t('install.step1.title') }}</h4>
-              <p class="text-textDim text-sm mb-2">{{ t('install.step1.desc') }}</p>
-              <a href="#" class="text-primary text-sm hover:underline flex items-center gap-1">
-                {{ t('install.step1.link') }} <div class="i-fa6-solid-arrow-right text-xs"></div>
-              </a>
-            </div>
-          </div>
-          <div class="flex gap-4">
-            <div class="w-8 h-8 rounded-full bg-surfaceVariant flex items-center justify-center text-text font-bold flex-shrink-0">2</div>
-            <div>
-              <h4 class="font-bold text-lg text-text">{{ t('install.step2.title') }}</h4>
-              <p class="text-textDim text-sm">
-                {{ t('install.step2.desc') }}
-              </p>
-            </div>
-          </div>
-          <div class="flex gap-4">
-            <div class="w-8 h-8 rounded-full bg-surfaceVariant flex items-center justify-center text-text font-bold flex-shrink-0">3</div>
-            <div>
-              <h4 class="font-bold text-lg text-text">{{ t('install.step3.title') }}</h4>
-              <p class="text-textDim text-sm">
-                {{ t('install.step3.desc') }}
-              </p>
-            </div>
-          </div>
-        </div>
+  <section id="install" class="py-24 bg-surfaceContainer/30 relative">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center mb-16">
+        <h2 class="section-title text-text">{{ t('install.title') }}</h2>
+        <p class="text-textDim max-w-2xl mx-auto">{{ t('install.subtitle') }}</p>
       </div>
 
-      <div id="test">
-        <h2 class="text-3xl font-bold mb-8 flex items-center gap-3 text-text">
-          <div class="i-fa6-solid-vial text-tertiary"></div>
-          {{ t('test.title') }}
-        </h2>
-        <div class="bg-surface p-6 rounded-3xl border border-border space-y-6">
-          <div>
-            <h5 class="text-sm font-bold text-text mb-2">Unit Tests</h5>
-            <p class="text-xs text-textDim mb-2">Testing core logic like `LyricsParser` and `StringUtils`.</p>
-            <div class="code-block">
-              ./gradlew testDebugUnitTest
-            </div>
+      <div class="grid md:grid-cols-2 gap-8 items-stretch">
+
+        <div class="group p-8 rounded-[2.5rem] bg-surfaceContainer border-2 border-primary/20 hover:border-primary transition-all duration-500 shadow-xl flex flex-col items-center text-center">
+
+          <div class="mb-6 w-20 h-20 rounded-3xl bg-white p-3 flex items-center justify-center shadow-inner relative z-10 overflow-hidden">
+            <img
+                src="/assets/izzy.jpg"
+                alt="IzzyOnDroid Logo"
+                class="w-full h-full object-contain"
+            />
           </div>
-          <div>
-            <h5 class="text-sm font-bold text-text mb-2">UI Tests (Espresso)</h5>
-            <p class="text-xs text-textDim mb-2">Automated UI testing for `SettingsScreen` and Navigation.</p>
-            <div class="code-block">
-              ./gradlew connectedAndroidTest
-            </div>
+
+          <h3 class="text-2xl font-bold text-text mb-2">IzzyOnDroid</h3>
+          <p class="text-textDim text-sm mb-8 flex-1">
+            {{ t('install.izzy.desc') }}
+          </p>
+
+          <a :href="IZZY_URL"
+             target="_blank"
+             class="w-full py-4 rounded-2xl bg-primary text-onPrimary font-bold flex items-center justify-center gap-3 hover:shadow-[0_8px_20px_rgba(var(--c-primary-rgb),0.4)] transition-all active:scale-95 decoration-none cursor-pointer">
+            <div class="i-fa6-solid-download text-lg"></div>
+            <span>{{ t('install.btn_izzy') }}</span>
+          </a>
+        </div>
+
+        <div class="group p-8 rounded-[2.5rem] bg-surfaceContainer/50 border border-border hover:border-tertiary/50 transition-all duration-500 flex flex-col items-center text-center">
+          <div class="w-20 h-20 rounded-3xl bg-surfaceVariant flex items-center justify-center mb-6 group-hover:bg-tertiary/10 group-hover:text-tertiary transition-colors">
+            <div class="i-fa6-brands-github text-4xl"></div>
           </div>
-          <div class="text-xs text-yellow-500/80 bg-yellow-500/10 p-3 rounded-lg flex gap-2">
-            <div class="i-fa6-solid-triangle-exclamation mt-0.5"></div>
-            <span>{{ t('test.note') }}</span>
-          </div>
+
+          <h3 class="text-2xl font-bold text-text mb-2">GitHub Releases</h3>
+          <p class="text-textDim text-sm mb-8 flex-1">
+            {{ t('install.github.desc') }}
+          </p>
+
+          <a :href="GITHUB_URL"
+             target="_blank"
+             class="w-full py-4 rounded-2xl bg-surfaceVariant text-text font-bold flex items-center justify-center gap-3 hover:bg-border transition-all active:scale-95 decoration-none cursor-pointer">
+            <div class="i-fa6-solid-box-archive text-lg"></div>
+            <span>{{ t('install.btn_github') }}</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="mt-12 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surfaceVariant/50 border border-border text-[10px] font-bold text-textDim uppercase tracking-widest">
+          <div class="i-fa6-solid-shield-halved text-primary"></div>
+          {{ t('install.safety_note') }}
         </div>
       </div>
 
     </div>
   </section>
 </template>
+
+<style scoped>
+/* Strukturierung der Titel-Klasse */
+.section-title {
+  @apply text-4xl md:text-5xl font-black tracking-tight mb-4;
+}
+</style>

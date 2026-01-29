@@ -1,6 +1,7 @@
 /**
- * Internationalisierungskonfiguration (i18n).
- * Enthält Übersetzungen für Deutsch (de) und Englisch (en).
+ * @file i18n.js
+ * @description Internationalisierungskonfiguration (i18n) für Vivi Music.
+ * Beinhaltet Übersetzungen für Deutsch (de) und Englisch (en) sowie Accessibility-Labels.
  */
 import { createI18n } from 'vue-i18n'
 
@@ -12,7 +13,6 @@ const messages = {
       install: 'Install',
       contribute: 'Contribute',
       language: 'Language',
-      // Accessibility Labels Navbar
       theme: {
         light: 'Switch to Light Mode',
         system: 'Switch to System Mode',
@@ -26,7 +26,8 @@ const messages = {
       subtitle: 'Unleashed.',
       description: 'The open-source Android player with Innertube integration, synced lyrics, and Material 3 Expressive Design.',
       btn_download: 'Download App',
-      btn_features: 'View Features'
+      btn_features: 'View Features',
+      release_notes: 'Open Release Notes for {version}'
     },
     features: {
       title_part1: 'Powerful',
@@ -55,24 +56,17 @@ const messages = {
       subtitle: 'Material 3 Expressive Design in Action.'
     },
     install: {
-      title: 'Installation',
-      step1: {
-        title: 'Download APK',
-        desc: 'Get the latest release from our GitHub repository.',
-        link: 'Go to Releases'
+      title: 'Get Vivi Music',
+      subtitle: 'Choose your preferred way to stay up to date.',
+      izzy: {
+        desc: 'The recommended way for F-Droid users. Secure, fast, and easy to update via the IzzyOnDroid repository.'
       },
-      step2: {
-        title: 'Allow Installation',
-        desc: 'Enable "Install from unknown sources" in your settings if prompted.'
+      github: {
+        desc: 'Download the latest APK directly from our GitHub releases if you prefer manual installation.'
       },
-      step3: {
-        title: 'Enjoy Music',
-        desc: 'Launch Vivi Music and sign in or start listening anonymously.'
-      }
-    },
-    test: {
-      title: 'Run Tests',
-      note: 'Requires a connected Android device or running emulator.'
+      btn_izzy: 'Get it on IzzyOnDroid',
+      btn_github: 'View Assets',
+      safety_note: 'Verified & Secure APKs'
     },
     contribute: {
       title: 'Contribute',
@@ -88,13 +82,11 @@ const messages = {
       pr: {
         title: 'Pull Request',
         desc: 'Submit your improvements or bug fixes for review.'
-      },
-      directories: 'Key Directories'
+      }
     },
     footer: {
       license: 'Licensed under GPL v3.0',
-      based_on: 'Based on the open-source Vivi Music Android project.',
-      // Accessibility Labels Footer
+      based_on: 'Based on InnerTune',
       social: {
         discord: 'Join our Discord Server',
         telegram: 'Join our Telegram Channel',
@@ -109,7 +101,6 @@ const messages = {
       install: 'Installieren',
       contribute: 'Mitwirken',
       language: 'Sprache',
-      // Accessibility Labels Navbar
       theme: {
         light: 'Zu hellem Design wechseln',
         system: 'Zu System-Design wechseln',
@@ -123,7 +114,8 @@ const messages = {
       subtitle: 'Entfesselt.',
       description: 'Der Open-Source Android Player mit Innertube Integration, synchronen Lyrics und Material 3 Expressive Design.',
       btn_download: 'App Laden',
-      btn_features: 'Funktionen'
+      btn_features: 'Funktionen',
+      release_notes: 'Release Notes für {version} öffnen'
     },
     features: {
       title_part1: 'Mächtige',
@@ -149,27 +141,20 @@ const messages = {
     },
     showcase: {
       title: 'Visuelle Exzellenz',
-      subtitle: 'Material 3 Expressive Design in Aktion.'
+      subtitle: 'Material 3 Expressive Design in Action.'
     },
     install: {
-      title: 'Installation',
-      step1: {
-        title: 'APK Herunterladen',
-        desc: 'Hole dir das neueste Release von unserem GitHub Repository.',
-        link: 'Zu den Releases'
+      title: 'Vivi Music holen',
+      subtitle: 'Wähle deine bevorzugte Quelle für Updates.',
+      izzy: {
+        desc: 'Der empfohlene Weg für F-Droid Nutzer. Sicher, schnell und einfach über das IzzyOnDroid Repository.'
       },
-      step2: {
-        title: 'Installation zulassen',
-        desc: 'Aktiviere "Installation aus unbekannten Quellen" in den Einstellungen.'
+      github: {
+        desc: 'Lade die aktuellste APK direkt von unseren GitHub Releases für eine manuelle Installation.'
       },
-      step3: {
-        title: 'Musik genießen',
-        desc: 'Starte Vivi Music und melde dich an oder höre anonym.'
-      }
-    },
-    test: {
-      title: 'Tests ausführen',
-      note: 'Erfordert ein verbundenes Android-Gerät oder einen laufenden Emulator.'
+      btn_izzy: 'Bei IzzyOnDroid laden',
+      btn_github: 'Assets ansehen',
+      safety_note: 'Verifizierte & Sichere APKs'
     },
     contribute: {
       title: 'Mitwirken',
@@ -185,13 +170,11 @@ const messages = {
       pr: {
         title: 'Pull Request',
         desc: 'Reiche deine Verbesserungen oder Fehlerbehebungen zur Überprüfung ein.'
-      },
-      directories: 'Wichtige Verzeichnisse'
+      }
     },
     footer: {
       license: 'Lizenziert unter GPL v3.0',
-      based_on: 'Basierend auf dem Open-Source Vivi Music Android Projekt.',
-      // Accessibility Labels Footer
+      based_on: 'Basiert auf InnerTune',
       social: {
         discord: 'Unserem Discord Server beitreten',
         telegram: 'Unserem Telegram Kanal beitreten',
@@ -202,11 +185,12 @@ const messages = {
 }
 
 /**
- * i18n Instanz erstellen.
+ * Erstellung der i18n-Instanz.
+ * Standardmäßig auf Englisch (en) eingestellt.
  */
 const i18n = createI18n({
   legacy: false,
-  locale: 'de',
+  locale: 'en',
   fallbackLocale: 'en',
   messages
 })
