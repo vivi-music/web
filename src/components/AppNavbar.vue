@@ -45,7 +45,7 @@ const toggleLang = () => {
           {{ locale }}
         </button>
 
-        <div class="bg-surfaceContainer rounded-full relative w-[96px] h-[40px] flex items-center justify-between px-1 border border-border">
+        <div class="bg-surfaceContainer rounded-full relative w-[104px] h-[40px] flex items-center justify-between px-1 border border-border">
           <div class="absolute top-[4px] left-[4px] w-[32px] h-[32px] bg-primary rounded-full transition-transform duration-300 z-10 shadow-[0_2px_8px_rgba(var(--c-primary-rgb),0.3)]"
                :style="{ transform: `translateX(${thumbPosition}px)` }"></div>
           
@@ -53,11 +53,11 @@ const toggleLang = () => {
             :class="currentTheme === 'light' ? 'text-onPrimary' : 'text-textDim'">
             <div class="i-fa6-solid-sun text-xs"></div>
           </button>
-          <button @click="setTheme('system', 28)" class="switch-btn" 
+          <button @click="setTheme('system', 32)" class="switch-btn" 
             :class="currentTheme === 'system' ? 'text-onPrimary' : 'text-textDim'">
             <div class="i-fa6-solid-circle-half-stroke text-xs"></div>
           </button>
-          <button @click="setTheme('dark', 56)" class="switch-btn" 
+          <button @click="setTheme('dark', 64)" class="switch-btn" 
             :class="currentTheme === 'dark' ? 'text-onPrimary' : 'text-textDim'">
             <div class="i-fa6-solid-moon text-xs"></div>
           </button>
@@ -72,17 +72,11 @@ const toggleLang = () => {
 </template>
 
 <style scoped>
-/* M3E "Tonal Button" Style für Navigation 
-  - Subtiler Hintergrund (Surface Variant)
-  - Abgerundet (Pill)
-  - Hover: Mehr Kontrast
-*/
+/* ... styles unchanged ... */
 .nav-btn {
   @apply px-6 py-2.5 rounded-full text-sm font-semibold text-textDim bg-surfaceContainer border border-transparent transition-all duration-300 hover:bg-surfaceVariant hover:text-text hover:border-border active:scale-95;
 }
 
-/* Hervorgehobener "Filled" Style für Call-to-Action (z.B. Contribute) 
-*/
 .nav-btn-filled {
   @apply px-6 py-2.5 rounded-full text-sm font-bold text-onPrimary bg-primary shadow-lg shadow-primary/20 transition-all duration-300 hover:opacity-90 hover:shadow-primary/40 active:scale-95;
 }
