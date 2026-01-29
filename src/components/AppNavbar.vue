@@ -1,4 +1,11 @@
 <script setup>
+/**
+ * App Navigation Bar
+ * Features:
+ * - Material 3 Expressive "Clean" Design
+ * - Glassmorphism Effect
+ * - Interactive Theme Switcher
+ */
 import { useTheme } from '../composables/useTheme'
 const { currentTheme, thumbPosition, setTheme } = useTheme()
 </script>
@@ -39,7 +46,7 @@ const { currentTheme, thumbPosition, setTheme } = useTheme()
           </button>
         </div>
 
-        <a href="https://github.com/vivi-music/web" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-all active:scale-95">
+        <a href="https://github.com/vivimusic-app-team/web" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-all active:scale-95">
           <div class="i-fa6-brands-github text-xl"></div>
         </a>
       </div>
@@ -48,12 +55,13 @@ const { currentTheme, thumbPosition, setTheme } = useTheme()
 </template>
 
 <style scoped>
-/* Navigation Items:
-  - Transparent by default (Clean look)
-  - Primary Color + Subtle Background on Hover
+/* Material 3 Navigation Item Styles
+  - Transparent default state
+  - Subtle background + Primary text on hover
+  - Ripple simulation on active
 */
 .nav-item {
-  @apply px-5 py-2.5 rounded-full text-sm font-semibold text-white/70 transition-all duration-300;
+  @apply px-5 py-2.5 rounded-full text-sm font-semibold text-white/70 transition-all duration-300 relative overflow-hidden;
 }
 
 .nav-item:hover {
@@ -64,7 +72,7 @@ const { currentTheme, thumbPosition, setTheme } = useTheme()
   @apply scale-95 bg-white/10;
 }
 
-/* Helper für den Switcher */
+/* Helper für Switch Buttons */
 .switch-btn {
   @apply flex-1 h-full flex items-center justify-center z-20 cursor-pointer transition-colors duration-300 bg-transparent border-none p-0;
 }
