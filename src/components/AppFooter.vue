@@ -13,13 +13,13 @@
       </div>
       
       <div class="flex gap-6">
-        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#5865F2] hover:text-white transition-colors text-white/50">
+        <a href="SOON" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#5865F2] hover:text-white transition-colors text-white/50">
           <div class="i-fa6-brands-discord"></div>
         </a>
-        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0088cc] hover:text-white transition-colors text-white/50">
+        <a href="https://t.me/+8rh2S_eSL302MDA1" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#0088cc] hover:text-white transition-colors text-white/50">
           <div class="i-fa6-brands-telegram"></div>
         </a>
-        <a href="https://github.com/t-boyke/vivi-music" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white/50">
+        <a href="https://github.com/vivi-music" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-colors text-white/50">
           <div class="i-fa6-brands-github"></div>
         </a>
       </div>
