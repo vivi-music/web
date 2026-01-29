@@ -2,7 +2,7 @@ import { ref, onMounted } from 'vue'
 
 export function useTheme() {
   const currentTheme = ref('system')
-  const thumbPosition = ref(32) 
+  const thumbPosition = ref(32) // Standard auf Mitte (32px)
 
   const applyTheme = (mode) => {
     const isDark = mode === 'dark' || 
@@ -34,9 +34,9 @@ export function useTheme() {
     
     // Init
     const saved = localStorage.getItem('vivi-theme') || 'system'
-    // Positionen hardcoden für Einfachheit: light=0, system=28/32, dark=56/64
-    // Hier nutzen wir einfach Standardwerte oder übergeben sie beim Aufruf
-    const pos = saved === 'light' ? 0 : (saved === 'dark' ? 56 : 28)
+    
+    // FIX: Positionen aktualisiert: light=0, system=32, dark=64
+    const pos = saved === 'light' ? 0 : (saved === 'dark' ? 64 : 32)
     setTheme(saved, pos)
   })
 
