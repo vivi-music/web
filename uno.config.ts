@@ -15,17 +15,20 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      // Magie: Wir verweisen auf die Variablen aus base.css
-      primary: 'var(--c-primary)',
+      // FIX: Nutzung von RGB-Vars mit %alpha Platzhalter für korrekte Transparenz
+      primary: 'rgba(var(--c-primary-rgb), %alpha)',
+      
       onPrimary: 'var(--c-on-primary)',
       surface: 'var(--c-surface)',
       surfaceContainer: 'var(--c-surface-container)',
       surfaceVariant: 'var(--c-surface-variant)',
       
-      // Neue semantische Farben
-      text: 'var(--c-text)',          // Haupttextfarbe
-      textDim: 'var(--c-text-dim)',   // Nebentextfarbe
-      border: 'var(--c-border)',      // Rahmenfarbe
+      text: 'var(--c-text)',
+      textDim: 'var(--c-text-dim)',
+      border: 'var(--c-border)',
+      
+      // Falls 'tertiary' auch genutzt wird (z.B. im Gradient), sollte es idealerweise auch definiert werden:
+      // tertiary: 'rgba(var(--c-tertiary-rgb), %alpha)', 
     }
   }
 })
