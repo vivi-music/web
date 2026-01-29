@@ -15,20 +15,17 @@ export default defineConfig({
   ],
   theme: {
     colors: {
-      // FIX: Nutzung von RGB-Vars mit %alpha Platzhalter für korrekte Transparenz
+      // WICHTIG: %alpha ermöglicht Opacity (z.B. text-primary/80)
       primary: 'rgba(var(--c-primary-rgb), %alpha)',
+      onPrimary: 'rgba(var(--c-on-primary-rgb), %alpha)',
       
-      onPrimary: 'var(--c-on-primary)',
-      surface: 'var(--c-surface)',
-      surfaceContainer: 'var(--c-surface-container)',
-      surfaceVariant: 'var(--c-surface-variant)',
+      surface: 'rgba(var(--c-surface-rgb), %alpha)',
+      surfaceContainer: 'rgba(var(--c-surface-container-rgb), %alpha)',
+      surfaceVariant: 'rgba(var(--c-surface-variant-rgb), %alpha)',
       
-      text: 'var(--c-text)',
-      textDim: 'var(--c-text-dim)',
-      border: 'var(--c-border)',
-      
-      // Falls 'tertiary' auch genutzt wird (z.B. im Gradient), sollte es idealerweise auch definiert werden:
-      // tertiary: 'rgba(var(--c-tertiary-rgb), %alpha)', 
+      text: 'rgba(var(--c-text-rgb), %alpha)',
+      textDim: 'rgba(var(--c-text-dim-rgb), %alpha)',
+      border: 'rgba(var(--c-border-rgb), %alpha)',
     }
   }
 })
