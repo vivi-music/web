@@ -10,10 +10,13 @@
 :root {
   /* --- DARK MODE (Standard) --- */
   --c-bg: #0f0d13;
-  --c-text: #E6E1E5;               /* Hellgrau/Weiß */
+  --c-text: #E6E1E5;
   --c-text-dim: rgba(230, 225, 229, 0.6);
   
-  --c-primary: #D0BCFF;
+  /* RGB Werte für Opacity-Support definieren */
+  --c-primary-rgb: 208, 188, 255; /* #D0BCFF */
+  --c-primary: rgb(var(--c-primary-rgb));
+  
   --c-on-primary: #381E72;
   
   --c-surface: #141218;
@@ -23,17 +26,20 @@
   --c-border: rgba(255, 255, 255, 0.1);
 }
 
-/* --- LIGHT MODE (Wird aktiv, wenn class="light" im HTML tag ist) --- */
+/* --- LIGHT MODE --- */
 html.light {
-  --c-bg: #fdf7ff;                 /* Sehr helles Lila/Weiß */
-  --c-text: #1d1b20;               /* Fast Schwarz */
+  --c-bg: #fdf7ff;
+  --c-text: #1d1b20;
   --c-text-dim: rgba(29, 27, 32, 0.6);
   
-  --c-primary: #6750A4;            /* Dunkleres Lila für Kontrast */
+  /* RGB Werte für Opacity-Support definieren */
+  --c-primary-rgb: 103, 80, 164; /* #6750A4 */
+  --c-primary: rgb(var(--c-primary-rgb));
+  
   --c-on-primary: #FFFFFF;
   
   --c-surface: #fdf7ff;
-  --c-surface-container: #f3edf7;  /* Helles Lila-Grau */
+  --c-surface-container: #f3edf7;
   --c-surface-variant: #e7e0ec;
   
   --c-border: rgba(0, 0, 0, 0.1);
@@ -42,7 +48,7 @@ html.light {
 /* Base Styles */
 body {
   background-color: var(--c-bg);
-  color: var(--c-text);            /* Hier wird die Farbe automatisch zugewiesen */
+  color: var(--c-text);
   font-family: "Plus Jakarta Sans", sans-serif;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
