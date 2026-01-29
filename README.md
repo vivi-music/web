@@ -59,7 +59,7 @@ npm run dev
 ```
 Open http://localhost:5173 in your browser.
 
-4. Deployment: For instructions on how to deploy this site to GitHub Pages, please refer to the Deployment Guide [DEPLOY.md](DEPLOY.md).
+4. Deployment: For instructions on how to deploy this site to GitHub Pages, please refer to the Deployment Guide [DEPLOY.md](Deploy.md).
 
 ## 📦 Building for Production
 To create an optimized production build:
