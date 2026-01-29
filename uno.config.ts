@@ -5,7 +5,7 @@ export default defineConfig({
     presetUno(),
     presetIcons({
       scale: 1.2,
-      cdn: 'https://esm.sh/'
+      // cdn Zeile wurde entfernt, damit lokale Icons genutzt werden
     }),
     presetWebFonts({
       provider: 'google',
