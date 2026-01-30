@@ -1,171 +1,171 @@
 # Vivi Music Website 🎵
 
-![License](https://img.shields.io/badge/license-GPLv3-blue.svg)
-![Vue.js](https://img.shields.io/badge/vue-3.x-42b883.svg)
-![Vite](https://img.shields.io/badge/vite-5.x-646cff.svg)
-![UnoCSS](https://img.shields.io/badge/unocss-0.58.x-333333.svg)
+[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](LICENSE)
+[![Vue.js](https://img.shields.io/badge/vue-3.5+-42b883.svg)](https://vuejs.org/)
+[![Vite](https://img.shields.io/badge/vite-7.x-646cff.svg)](https://vitejs.dev/)
+[![UnoCSS](https://img.shields.io/badge/unocss-0.66+-333333.svg)](https://unocss.dev/)
+[![I18n](https://img.shields.io/badge/i18n-11%20Languages-FF69B4.svg)](#-internationalization)
 
-The official landing page for **Vivi Music**, an open-source Android music player. This project is a modern Single Page Application (SPA) built with **Vue.js 3**, designed to showcase the app's features with Google's **Material Design Expressive** aesthetics.
+The official landing page for **Vivi Music**, an open-source Android music player. This project is a premium Single Page Application (SPA) designed with **Material 3 Expressive (M3E)** aesthetics and modern software architecture principles to showcase the app's cutting-edge features.
 
-## ✨ Features
+---
 
-- **Material 3 Expressive Design:** Fully customized theme using UnoCSS presets.
-- **Interactive 3D Elements:** Hero section featuring a reactive 3D phone mockup.
-- **Dynamic Theming:** Built-in Light, Dark, and System theme switching logic.
-- **Performance First:** Powered by Vite for lightning-fast HMR and optimized builds.
-- **Modular Architecture:** Component-based structure using Vue SFCs (Single File Components).
+## 🚀 Core Features
+
+- **Material 3 Expressive (M3E) Design:** A high-energy, vibrant UI featuring dynamic accent colors, organic shapes (`rounded-[2.5rem]`), and glassmorphism.
+- **Pixel 10 Pro XL Mockups:** High-fidelity 3D device frames presenting the app's interface in a modern flagship context with realistic camera and depth effects.
+- **Interactive 3D Motion:** An immersive Hero section with smooth 3D tilt effects powered by a Lerp-based smoothing algorithm and parallax depth.
+- **Dynamic Content:** Real-time fetching of the latest version, release notes, and community contributors directly from the GitHub API.
+- **Living Backgrounds:** A dynamic background system with morphing, rotating blobs that create a sense of depth and life (`BackgroundBlobs.vue`).
+- **Lottie & Markdown:** Playful vector animations for installation steps and seamless rendering of technical changelogs using `marked`.
+
+---
+
+## 🏗️ Architecture & Performance
+
+This project follows modern development best practices to ensure scalability and speed:
+
+- **OOCSS with UnoCSS:** Utilizes a custom design system built with UnoCSS shortcuts (e.g., `m3-card-expressive`, `m3-btn-primary`), separating structural logic from visual "skins".
+- **Modular Barrel Files:** Clean and maintainable imports via central index files in `src/components/` and `src/composables/`.
+- **Code Splitting:** Lazy loading of "below-the-fold" sections (FeatureGrid, InstallSection, etc.) using `defineAsyncComponent` to minimize initial bundle size and improve LCP.
+- **Lazy Reveal Animations:** Intersection Observer-based transitions that reveal components only when they enter the viewport, reducing initial rendering overhead.
+- **Shared State Composables:** Efficient state management for API data to prevent redundant network requests across different components.
+
+---
+
+## 🎨 Design Language (M3E)
+
+This website is a showcase of the **Material 3 Expressive** guidelines:
+- **Visual Depth:** Multi-layered background glows, glassmorphism (backdrop-blur), and soft shadows.
+- **Typography:** Bold, black headlines using *Plus Jakarta Sans* for a modern, high-contrast look.
+- **Interactivity:** Every card and button features bouncy hover states, translations, and dynamic accent colors.
+- **Themes:** Intelligent Light/Dark/System theme switching with smooth transitions and persistent state.
+
+---
 
 ## 🛠 Tech Stack
 
-- **Framework:** [Vue.js 3](https://vuejs.org/) (Composition API)
-- **Build Tool:** [Vite](https://vitejs.dev/)
-- **Styling:** [UnoCSS](https://unocss.dev/) (Atomic CSS engine)
-- **Icons:** UnoCSS Preset Icons (FontAwesome 6 source)
+- **Framework:** [Vue.js 3](https://vuejs.org/) (Composition API, `<script setup>`)
+- **Styling:** [UnoCSS](https://unocss.dev/) (Atomic CSS with custom M3E theme tokens)
+- **Icons:** [Iconify](https://iconify.design/) via UnoCSS (FontAwesome 6 Solid/Brands)
+- **Animations:** [Vue3Lottie](https://vue3-lottie.vercel.app/) & CSS Keyframes
+- **Markdown:** [Marked](https://marked.js.org/) (for rendering changelogs)
+- **Logic:** Custom Composables for Theme, 3D-Tilt, GitHub API, and Intersection Observers.
 
-## 📂 Project Structure
+---
+
+## 🌐 Internationalization
+
+Full support for multiple languages with automatic detection and seamless switching:
+- 🇺🇸 **English** (Default)
+- 🇩🇪 **German**
+- 🇪🇸 **Spanish**
+- 🇫🇷 **French**
+- 🇷🇺 **Russian**
+- 🇯🇵 **Japanese**
+- 🇰🇷 **Korean**
+- 🇨🇳 **Chinese**
+- 🇹🇷 **Turkish**
+- 🇧🇷 **Portuguese (Brazilian)**
+- 🇮🇳 **Malayalam**
+
+Powered by `vue-i18n`, the site dynamically translates all content based on browser settings or user preference, with state persistence.
+
+---
+
+## 📂 Project Architecture
 
 ```text
 vivi-music-website/
-├── public/              # Static assets (images, favicon)
+├── public/              # Static assets & Lottie JSON files
 ├── src/
-│   ├── assets/          # Global CSS and local assets
-│   ├── components/      # Vue Single File Components (SFCs)
+│   ├── assets/          
+│   │   ├── css/         # Global Material 3 color variables (base.css)
+│   │   └── LogoSmall.png
+│   ├── components/      # Modular Vue SFCs
+│   │   ├── index.js     # Component Barrel-file
+│   │   ├── AppNavbar.vue
+│   │   ├── HeroSection.vue
+│   │   ├── BackgroundBlobs.vue
+│   │   ├── FeatureGrid.vue
+│   │   ├── ScreenshotShowcase.vue
+│   │   ├── InstallSection.vue
+│   │   ├── ContributeSection.vue
+│   │   └── ChangelogModal.vue
 │   ├── composables/     # Reusable logic (Hooks)
-│   ├── App.vue          # Root component
-│   └── main.js          # Application entry point
-├── uno.config.ts        # UnoCSS & Theme configuration
-└── vite.config.js       # Vite configuration
+│   │   ├── index.js     # Composables Barrel-file
+│   │   ├── useTheme.js
+│   │   ├── useTilt.js
+│   │   ├── useGithubRelease.js
+│   │   ├── useGithubContributors.js
+│   │   └── useIntersectionObserver.js
+│   ├── i18n.js          # Translation dictionaries
+│   ├── App.vue          # Root Layout & Lazy Loading
+│   └── main.js          # App entry
+├── uno.config.ts        # Design System & M3E Shortcuts
+└── vite.config.js       # Vite & Base Path configuration
 ```
 
+---
+
 ## 🚀 Getting Started
-Prerequisites
-Node.js (version 18+ recommended)
-npm or pnpm
-Installation
+
+### Prerequisites
+- Node.js (version 20+ recommended)
+- npm or pnpm
+
+### Installation
 1. Clone the repository:
-```Bash
-git clone [https://github.com/your-username/vivi-music-website.git](https://github.com/your-username/vivi-music-website.git)
-cd vivi-music-website
+```bash
+git clone https://github.com/vivimusic-app-team/web.git
+cd web
 ```
 
 2. Install dependencies:
-```Bash
+```bash
 npm install
 ```
 
 3. Run development server:
-```Bash
+```bash
 npm run dev
 ```
-Open http://localhost:5173 in your browser.
 
-4. Deployment: For instructions on how to deploy this site to GitHub Pages, please refer to the Deployment Guide [DEPLOY.md](Deploy.md).
+---
 
-## 📦 Building for Production
+## 📦 Build & Deployment
+
+### Production Build
 To create an optimized production build:
-
-```Bash
+```bash
 npm run build
 ```
+The output will be generated in the `dist/` directory.
 
-The output will be generated in the dist/ directory.
-## 🌐 Deployment: GitHub Pages
-This project is configured to be easily deployed to GitHub Pages. Follow one of the methods below.
-Important: Configure Base Path
-Before deploying, if your repository is NOT at the root (e.g., username.github.io/repo-name/), you must set the base path in vite.config.js.
-vite.config.js:
+### GitHub Pages Deployment
+The project includes a GitHub Action for automated deployment.
+1. Configure your `vite.config.js` `base` path to match your repo name.
+2. Push to the `main` branch.
+3. The `.github/workflows/deploy.yml` will handle the build and deployment to the `gh-pages` environment.
 
-```JavaScript
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import UnoCSS from 'unocss/vite'
+---
 
-// Replace 'vivi-music-website' with your actual repository name
-export default defineConfig({
-  base: '/vivi-music-website/', 
-  plugins: [
-    vue(),
-    UnoCSS(),
-  ],
-})
-```
-
-**Method 1: Automated Deployment (GitHub Actions) - Recommended**
-1. Go to your GitHub Repository settings.
-2. Navigate to Settings > Pages.
-3. Under Build and deployment > Source, select GitHub Actions.
-4. GitHub will suggest a Static HTML workflow. Click "Configure".
-5. Paste the following workflow configuration:
-.github/workflows/deploy.yml
-```YAML
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-```
-
-6. Commit the file. Your site will deploy automatically on every push to main.
-
-**Method 2: Manual Deployment**
-If you prefer to build locally and push the artifacts:
-1. Run the build command:
-```Bash
-npm run build
-```
-
-2. Commit the dist folder content to a gh-pages branch (usually handled by scripts, but Method 1 is preferred for modern development).
 ## 🤝 Contributing
-Contributions are welcome! Please follow these steps:
-1. Fork the project.
-2. Create your feature branch (git checkout -b feature/AmazingFeature).
-3. Commit your changes (git commit -m 'Add some AmazingFeature').
-4. Push to the branch (git push origin feature/AmazingFeature).
+
+We love our community! Whether you are fixing a bug, adding a translation, or improving the design:
+1. Fork the repo.
+2. Create your feature branch.
+3. Commit your changes.
+4. Push to the branch.
 5. Open a Pull Request.
+
+---
+
 ## 📄 License
-Distributed under the GPL v3.0 License. See LICENSE for more information.
+
+Distributed under the **GPL v3.0 License**. See [LICENSE](LICENSE) for more information.
+
+---
+<p align="center">
+  Developed with ❤️ by the Vivi Music Team
+</p>

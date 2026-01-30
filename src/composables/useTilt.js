@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, shallowRef, onMounted, onUnmounted } from 'vue'
 
 /**
  * Composable für 3D-Kipp-Effekte basierend auf Mausposition oder Gyroskop.
@@ -8,69 +8,73 @@ import { ref, onMounted, onUnmounted } from 'vue'
  * @returns {Object} Interface zur Steuerung der Sensoren.
  */
 export function useTilt(elementRef) {
-  // Konfiguration für Empfindlichkeit
+  // Konfiguration für Empfindlichkeit und Glättung
   const CONFIG = {
-    maxRotation: 20, // Max Neigung in Grad
-    mouseFactor: 30, // Dämpfung für Maus
-    gyroFactor: 1.5  // Verstärkung für Gyro
+    maxRotation: 15,    // Max Neigung in Grad
+    mouseFactor: 0.05,  // Empfindlichkeit Maus
+    gyroFactor: 1.2,    // Verstärkung für Gyro
+    smoothing: 0.1      // Glättungsfaktor (Lerp)
   }
 
-  /**
-   * Speichert den aktuellen Status der Berechtigung.
-   * null = unbekannt/nicht nötig, false = verweigert/nötig, true = erlaubt
-   */
-  const permissionGranted = ref(null)
+  // shallowRef reicht hier aus, da wir keine tiefen Objekte tracken müssen
+  const permissionGranted = shallowRef(null)
+
+  // Aktuelle und Ziel-Werte für die Animation
+  const current = { x: 0, y: 0 }
+  const target = { x: 0, y: 0 }
+  let rafId = null
 
   /**
-   * Event-Handler für Mausbewegungen (Desktop Fallback).
-   * @param {MouseEvent} e
+   * Die Animationsschleife (flüssiger als direkte Events)
    */
+  const animate = () => {
+    // Lerp-Formel: current + (target - current) * factor
+    current.x += (target.x - current.x) * CONFIG.smoothing
+    current.y += (target.y - current.y) * CONFIG.smoothing
+
+    if (elementRef.value) {
+      updateTransform(current.x, current.y)
+    }
+
+    rafId = requestAnimationFrame(animate)
+  }
+
   const handleMouseMove = (e) => {
-    if (!elementRef.value) return
+    // Zielwerte basierend auf Mausposition berechnen (relativ zur Bildschirmmitte)
+    const centerX = window.innerWidth / 2
+    const centerY = window.innerHeight / 2
 
-    const x = (window.innerWidth / 2 - e.pageX) / CONFIG.mouseFactor
-    const y = (window.innerHeight / 2 - e.pageY) / CONFIG.mouseFactor
+    // Wir wollen X-Achse neigen wenn Maus Y bewegt und Y-Achse wenn Maus X bewegt
+    target.y = (e.clientX - centerX) * CONFIG.mouseFactor
+    target.x = (centerY - e.clientY) * CONFIG.mouseFactor
 
-    updateTransform(x, y)
+    // Begrenzung
+    target.x = clamp(target.x, -CONFIG.maxRotation, CONFIG.maxRotation)
+    target.y = clamp(target.y, -CONFIG.maxRotation, CONFIG.maxRotation)
   }
 
-  /**
-   * Event-Handler für Gyroskop-Daten (Mobile).
-   * @param {DeviceOrientationEvent} e
-   */
   const handleOrientation = (e) => {
-    if (!elementRef.value) return
-
-    // Beta: x-Achse (-180 bis 180), Gamma: y-Achse (-90 bis 90)
     const { beta, gamma } = e
     if (beta === null || gamma === null) return
 
-    // Werte begrenzen und skalieren
-    const rotateX = clamp(-beta * CONFIG.gyroFactor, -CONFIG.maxRotation, CONFIG.maxRotation)
-    const rotateY = clamp(gamma * CONFIG.gyroFactor, -CONFIG.maxRotation, CONFIG.maxRotation)
-
-    updateTransform(rotateY, rotateX) // Achsen tauschen für CSS rotateX/Y
+    // Mobile: Beta ist X-Rotation, Gamma ist Y-Rotation
+    target.x = clamp(beta * CONFIG.gyroFactor - 45, -CONFIG.maxRotation, CONFIG.maxRotation) // -45 als Offset für Halte-Winkel
+    target.y = clamp(gamma * CONFIG.gyroFactor, -CONFIG.maxRotation, CONFIG.maxRotation)
   }
 
-  /**
-   * Wendet die Transformation auf das Element an.
-   * @param {number} rotateY - Rotation um Y-Achse (links/rechts)
-   * @param {number} rotateX - Rotation um X-Achse (oben/unten)
-   */
-  const updateTransform = (rotateY, rotateX) => {
-    // requestAnimationFrame könnte hier für Performance ergänzt werden
-    elementRef.value.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`
+  const updateTransform = (x, y) => {
+    const el = elementRef.value
+    if (!el) return
+    
+    // Kombinierte Transformation für 3D Effekt
+    // Wir nutzen auch CSS Variablen für Parallax-Effekte in der Komponente
+    el.style.setProperty('--tilt-x', `${x}deg`)
+    el.style.setProperty('--tilt-y', `${y}deg`)
+    el.style.transform = `rotateX(${x}deg) rotateY(${y}deg)`
   }
 
-  /**
-   * Hilfsfunktion: Begrenzt Werte auf Min/Max.
-   */
   const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
 
-  /**
-   * Fordert Berechtigung für Sensoren an (iOS 13+).
-   * Muss durch User-Interaktion (Klick) ausgelöst werden.
-   */
   const requestPermission = async () => {
     if (typeof DeviceOrientationEvent !== 'undefined' &&
         typeof DeviceOrientationEvent.requestPermission === 'function') {
@@ -78,39 +82,36 @@ export function useTilt(elementRef) {
         const response = await DeviceOrientationEvent.requestPermission()
         if (response === 'granted') {
           permissionGranted.value = true
-          window.addEventListener('deviceorientation', handleOrientation)
+          window.addEventListener('deviceorientation', handleOrientation, { passive: true })
         } else {
           permissionGranted.value = false
-          alert('Berechtigung verweigert. Tilt-Effekt deaktiviert.')
         }
       } catch (error) {
         console.error(error)
       }
     } else {
-      // Android / ältere iOS benötigen keine explizite Berechtigung
       permissionGranted.value = true
-      window.addEventListener('deviceorientation', handleOrientation)
+      window.addEventListener('deviceorientation', handleOrientation, { passive: true })
     }
   }
 
   onMounted(() => {
-    // Standardmäßig Maus aktivieren
-    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    rafId = requestAnimationFrame(animate)
 
-    // Prüfen ob wir auf iOS sind (Permission API existiert)
     if (typeof DeviceOrientationEvent !== 'undefined' &&
         typeof DeviceOrientationEvent.requestPermission === 'function') {
-      permissionGranted.value = false // Button anzeigen
+      permissionGranted.value = false
     } else {
-      // Versuche direkt Gyro zu binden (Android/Desktop DevTools)
-      window.addEventListener('deviceorientation', handleOrientation)
-      permissionGranted.value = true // Kein Button nötig
+      window.addEventListener('deviceorientation', handleOrientation, { passive: true })
+      permissionGranted.value = true
     }
   })
 
   onUnmounted(() => {
     window.removeEventListener('mousemove', handleMouseMove)
     window.removeEventListener('deviceorientation', handleOrientation)
+    if (rafId) cancelAnimationFrame(rafId)
   })
 
   return {

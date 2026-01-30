@@ -1,31 +1,40 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, shallowRef, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useGithubRelease } from '../composables/useGithubRelease'
-import ChangelogModal from './ChangelogModal.vue'
+import { useGithubRelease, useIntersectionObserver } from '../composables'
+import { ChangelogModal } from './'
+
+defineOptions({
+  name: 'AppFooter'
+})
 
 const { t } = useI18n()
 
-// GitHub Daten holen
+// GitHub Daten holen (Nutzt Shared State aus dem Composable)
 const { latestVersion, releaseDescription, fetchLatestRelease } = useGithubRelease()
+
+const footerRef = shallowRef(null)
+const isVisible = useIntersectionObserver(footerRef, { threshold: 0.1, once: true })
 
 // Modal State
 const showChangelog = ref(false)
 
 onMounted(() => {
-  // Version laden (Fallback 'v5.0.3' falls API offline)
-  fetchLatestRelease('v5.0.3')
+  // fetchLatestRelease ist nun sicher mehrfach aufrufbar (Shared State)
+  fetchLatestRelease()
 })
 </script>
 
 <template>
-  <footer class="bg-surface py-16 border-t border-border/50 relative overflow-hidden">
+  <footer ref="footerRef" 
+          class="bg-surface py-16 border-t border-border/50 relative overflow-hidden transition-all duration-1000"
+          :class="isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'">
     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-primary/5 blur-[80px] pointer-events-none"></div>
 
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10 relative z-10">
+    <div class="m3-container flex flex-col md:flex-row justify-between items-center gap-10">
 
       <div class="flex items-center gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-surfaceContainer flex items-center justify-center border border-white/10 shadow-lg group">
+        <div class="m3-icon-box-sm bg-surfaceContainer border border-white/10 group">
           <img
               src="/assets/LogoSmall.png"
               alt="Vivi Music Logo"
