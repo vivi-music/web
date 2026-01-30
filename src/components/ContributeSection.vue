@@ -108,8 +108,11 @@ onMounted(() => {
               <div class="relative">
                 <div class="absolute -inset-2 bg-gradient-to-tr from-primary to-tertiary rounded-full opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500"></div>
                 <img
-                    :src="user.avatar_url"
+                    :src="user.avatar_url + '&s=64'"
                     :alt="user.login"
+                    width="64"
+                    height="64"
+                    loading="lazy"
                     class="w-16 h-16 rounded-full border-4 border-surface bg-surfaceContainer object-cover transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 relative z-10 shadow-xl grayscale-[50%] group-hover:grayscale-0"
                 />
               </div>

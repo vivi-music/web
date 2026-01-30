@@ -3,10 +3,11 @@
  * @file HeroSection.vue
  * @description Hauptbereich der Landing Page mit 3D-Smartphone und dynamischen Release-Daten.
  */
-import { ref, shallowRef, onMounted } from 'vue'
+import { ref, shallowRef, onMounted, defineAsyncComponent } from 'vue'
 import { useTilt, useGithubRelease } from '../composables'
 import { useI18n } from 'vue-i18n'
-import { ChangelogModal } from './'
+
+const ChangelogModal = defineAsyncComponent(() => import('./ChangelogModal.vue'))
 
 defineOptions({
   name: 'HeroSection'

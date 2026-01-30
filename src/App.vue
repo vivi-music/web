@@ -4,7 +4,9 @@
  * Nutzt Async Components für verbesserte Performance (Code Splitting).
  */
 import { defineAsyncComponent, ref, onMounted, onUnmounted } from 'vue'
-import { AppNavbar, HeroSection, BackgroundBlobs } from './components/index.js'
+import AppNavbar from './components/AppNavbar.vue'
+import HeroSection from './components/HeroSection.vue'
+import BackgroundBlobs from './components/BackgroundBlobs.vue'
 
 // Below-the-fold Komponenten werden erst bei Bedarf geladen
 const FeatureGrid = defineAsyncComponent(() => import('./components/FeatureGrid.vue'))

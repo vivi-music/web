@@ -1,8 +1,9 @@
 <script setup>
-import { ref, shallowRef, onMounted } from 'vue'
+import { ref, shallowRef, onMounted, defineAsyncComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useGithubRelease, useIntersectionObserver } from '../composables'
-import { ChangelogModal } from './'
+
+const ChangelogModal = defineAsyncComponent(() => import('./ChangelogModal.vue'))
 
 defineOptions({
   name: 'AppFooter'
@@ -38,6 +39,9 @@ onMounted(() => {
           <img
               src="/assets/LogoSmall.png"
               alt="Vivi Music Logo"
+              width="28"
+              height="28"
+              loading="lazy"
               class="w-7 h-7 object-contain group-hover:scale-110 transition-transform duration-300"
           />
         </div>

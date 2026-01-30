@@ -73,8 +73,10 @@ onMounted(() => {
           <div class="absolute -inset-2 bg-primary/20 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity animate-glow-pulse"></div>
           <img
               src="/assets/LogoSmall.png"
-              alt=""
-              aria-hidden="true"
+              alt="Vivi Music Logo"
+              width="40"
+              height="40"
+              fetchpriority="high"
               class="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-500 ease-out relative z-10"
           />
         </div>
@@ -234,7 +236,7 @@ onMounted(() => {
         <!-- Drawer Panel -->
         <div class="relative w-80 h-full bg-surface border-l border-border/50 shadow-2xl p-8 flex flex-col gap-8 transition-all duration-500 ease-out translate-x-0">
           <div class="flex items-center gap-4 mb-4">
-            <img src="/assets/LogoSmall.png" class="w-10 h-10 object-contain" alt="" />
+            <img src="/assets/LogoSmall.png" width="40" height="40" loading="lazy" class="w-10 h-10 object-contain" alt="Vivi Music Logo" />
             <span class="font-black text-xl tracking-tight text-text">Vivi Music</span>
           </div>
 

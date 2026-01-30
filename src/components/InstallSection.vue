@@ -39,7 +39,7 @@ const steps = [
 
         <div class="p-8 m3-card-expressive flex flex-col items-center text-center group">
           <div class="m3-icon-box bg-white p-3 mb-6 group-hover:scale-110">
-            <img src="/assets/izzy.jpg" alt="IzzyOnDroid" class="w-full h-full object-contain" />
+            <img src="/assets/izzy.jpg" alt="IzzyOnDroid" width="56" height="56" loading="lazy" class="w-full h-full object-contain" />
           </div>
           <h3 class="text-2xl font-black text-text mb-2 group-hover:text-primary transition-colors">{{ t('install.izzy.title') }}</h3>
           <p class="text-textDim text-sm mb-8 flex-1 leading-relaxed opacity-80">
