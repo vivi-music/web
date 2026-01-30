@@ -16,7 +16,7 @@ The official landing page for **Vivi Music**, an open-source Android music playe
 - **Pixel 10 Pro XL Mockups:** High-fidelity 3D device frames presenting the app's interface in a modern flagship context with realistic camera and depth effects.
 - **Interactive 3D Motion:** An immersive Hero section with smooth 3D tilt effects powered by a Lerp-based smoothing algorithm and parallax depth.
 - **Dynamic Content:** Real-time fetching of the latest version, release notes, and community contributors directly from the GitHub API.
-- **Living Backgrounds:** A dynamic background system with morphing, rotating blobs that create a sense of depth and life (`BackgroundBlobs.vue`).
+- **Living Backgrounds:** A dynamic background system with morphing, rotating blobs that create a sense of depth and life (`AppBackground.vue`).
 - **Lottie & Markdown:** Playful vector animations for installation steps and seamless rendering of technical changelogs using `marked`.
 - **SEO & Social Presence:** Professional Open Graph and Twitter Card metadata for high-quality previews on Discord, Twitter, and social platforms.
 - **PWA & Homescreen:** Fully installable as a web app (PWA) on mobile devices with custom manifest support and brand-matched theme colors.
@@ -90,7 +90,7 @@ vivi-music-website/
 │   │   ├── index.js     # Component Barrel-file
 │   │   ├── AppNavbar.vue
 │   │   ├── HeroSection.vue
-│   │   ├── BackgroundBlobs.vue
+│   │   ├── AppBackground.vue
 │   │   ├── FeatureGrid.vue
 │   │   ├── ScreenshotShowcase.vue
 │   │   ├── InstallSection.vue

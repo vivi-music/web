@@ -6,7 +6,7 @@
 import { defineAsyncComponent, ref, onMounted, onUnmounted } from 'vue'
 import AppNavbar from './components/AppNavbar.vue'
 import HeroSection from './components/HeroSection.vue'
-import BackgroundBlobs from './components/BackgroundBlobs.vue'
+import AppBackground from './components/AppBackground.vue'
 
 // Below-the-fold Komponenten werden erst bei Bedarf geladen
 const FeatureGrid = defineAsyncComponent(() => import('./components/FeatureGrid.vue'))
@@ -46,7 +46,7 @@ onUnmounted(() => {
     <div class="fixed top-0 left-0 h-1.5 bg-primary z-[100] transition-all duration-150 ease-out shadow-[0_0_10px_rgba(var(--c-primary-rgb),0.5)]" 
          :style="{ width: scrollProgress + '%' }"></div>
 
-    <BackgroundBlobs />
+    <AppBackground />
     <AppNavbar />
 
     <main class="flex-grow">
