@@ -4,7 +4,7 @@
  * Nutzt Async Components für verbesserte Performance (Code Splitting).
  */
 import { defineAsyncComponent, ref, onMounted, onUnmounted } from 'vue'
-import { AppNavbar, HeroSection, BackgroundBlobs } from './components'
+import { AppNavbar, HeroSection, BackgroundBlobs } from './components/index.js'
 
 // Below-the-fold Komponenten werden erst bei Bedarf geladen
 const FeatureGrid = defineAsyncComponent(() => import('./components/FeatureGrid.vue'))
@@ -15,9 +15,14 @@ const ContributeSection = defineAsyncComponent(() => import('./components/Contri
 const AppFooter = defineAsyncComponent(() => import('./components/AppFooter.vue'))
 
 const showScrollTop = ref(false)
+const scrollProgress = ref(0)
 
 const handleScroll = () => {
   showScrollTop.value = window.scrollY > 500
+  
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+  scrollProgress.value = height > 0 ? (winScroll / height) * 100 : 0
 }
 
 const scrollToTop = () => {
@@ -36,6 +41,9 @@ onUnmounted(() => {
 <template>
   <div class="flex flex-col min-h-screen font-sans text-text selection:bg-primary selection:text-onPrimary relative overflow-x-hidden">
     
+    <div class="fixed top-0 left-0 h-1.5 bg-primary z-[100] transition-all duration-150 ease-out shadow-[0_0_10px_rgba(var(--c-primary-rgb),0.5)]" 
+         :style="{ width: scrollProgress + '%' }"></div>
+
     <BackgroundBlobs />
     <AppNavbar />
 

@@ -49,14 +49,14 @@ const steps = [
              target="_blank"
              rel="noopener noreferrer"
              class="m3-btn-primary w-full">
-            <div class="i-fa6-solid-download text-lg"></div>
+            <div class="i-fa6-solid-download text-lg" aria-hidden="true"></div>
             {{ t('install.btn_izzy') }}
           </a>
         </div>
 
         <div class="p-8 m3-card-expressive hover:border-secondary/50 hover:shadow-secondary/10 flex flex-col items-center text-center group">
           <div class="m3-icon-box bg-surfaceVariant/30 mb-6 group-hover:scale-110">
-            <div class="i-fa6-brands-github text-4xl group-hover:text-primary transition-colors"></div>
+            <div class="i-fa6-brands-github text-4xl group-hover:text-primary transition-colors" aria-hidden="true"></div>
           </div>
           <h3 class="text-2xl font-black text-text mb-2 group-hover:text-primary transition-colors">{{ t('install.github.title') }}</h3>
           <p class="text-textDim text-sm mb-8 flex-1 leading-relaxed opacity-80">
@@ -66,7 +66,7 @@ const steps = [
              target="_blank"
              rel="noopener noreferrer"
              class="w-full py-4 rounded-2xl bg-surfaceVariant text-text font-bold flex items-center justify-center gap-2 hover:bg-surfaceVariant/80 transition-all active:scale-95 border border-border/20 decoration-none shadow-lg">
-            <div class="i-fa6-solid-box-archive text-lg"></div>
+            <div class="i-fa6-solid-box-archive text-lg" aria-hidden="true"></div>
             {{ t('install.btn_github') }}
           </a>
         </div>

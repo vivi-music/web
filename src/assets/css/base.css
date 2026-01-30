@@ -99,9 +99,16 @@ a {
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--c-surface); }
-::-webkit-scrollbar-thumb { background: var(--c-surface-variant); border-radius: 3px; }
+::-webkit-scrollbar-thumb { 
+  background: rgba(var(--c-primary-rgb), 0.3); 
+  border-radius: 10px;
+  border: 2px solid var(--c-surface);
+}
+::-webkit-scrollbar-thumb:hover { 
+  background: rgba(var(--c-primary-rgb), 0.5); 
+}
 
 /* 3D Effekte für Screenshots & Hero */
 .perspective-1000 { perspective: 1000px; }

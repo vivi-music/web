@@ -158,6 +158,8 @@ const messages = {
       }
     },
     faq: {
+      title: 'FAQ',
+      subtitle: 'Got questions? We have answers.',
       cost: { q: 'Is it free?', a: 'Yes, Vivi Music is 100% free and open-source.' },
       source: { q: 'Where can I find the code?', a: 'Everything is public on our GitHub organization.' },
       ytmusic: { q: 'Does it require YouTube Premium?', a: 'No, it works without any subscription via InnerTube.' },
@@ -316,6 +318,8 @@ const messages = {
       }
     },
     faq: {
+      title: 'FAQ',
+      subtitle: 'Fragen? Wir haben Antworten.',
       cost: { q: 'Ist es kostenlos?', a: 'Ja, Vivi Music ist zu 100% kostenlos und Open Source.' },
       source: { q: 'Wo finde ich den Code?', a: 'Alles ist öffentlich in unserer GitHub-Organisation einsehbar.' },
       ytmusic: { q: 'Benötigt es YouTube Premium?', a: 'Nein, es funktioniert ohne Abonnement über die InnerTube API.' },
@@ -474,6 +478,8 @@ const messages = {
       }
     },
     faq: {
+      title: 'FAQ',
+      subtitle: '¿Tienes preguntas? Tenemos respuestas.',
       cost: { q: '¿Es gratis?', a: 'Sí, Vivi Music es 100% gratuito y de código abierto.' },
       source: { q: '¿Dónde está el código?', a: 'Todo es público en nuestra organización de GitHub.' },
       ytmusic: { q: '¿Requiere YouTube Premium?', a: 'No, funciona sin suscripción a través de InnerTube.' },
@@ -630,6 +636,15 @@ const messages = {
         telegram: 'Rejoindre notre Telegram',
         github: 'Visiter GitHub'
       }
+    },
+    faq: {
+      title: 'FAQ',
+      subtitle: 'Des questions ? Nous avons les réponses.',
+      cost: { q: 'Est-ce gratuit ?', a: 'Oui, Vivi Music est 100% gratuit et open-source.' },
+      source: { q: 'Où trouver le code ?', a: 'Tout est public sur notre organisation GitHub.' },
+      ytmusic: { q: 'Faut-il YouTube Premium ?', a: 'Non, cela fonctionne sans abonnement via InnerTube.' },
+      download: { q: 'Est-ce sur le Play Store ?', a: 'En raison des politiques de Google, c\'est seulement sur GitHub et IzzyOnDroid.' },
+      safety: { q: 'Est-ce sûr ?', a: 'Oui, l\'application est open-source et vérifiée par la communauté.' }
     }
   },
   ru: {
@@ -781,6 +796,15 @@ const messages = {
         telegram: 'Наш Telegram',
         github: 'GitHub Организация'
       }
+    },
+    faq: {
+      title: 'FAQ',
+      subtitle: 'Есть вопросы? У нас есть ответы.',
+      cost: { q: 'Это бесплатно?', a: 'Да, Vivi Music на 100% бесплатна и имеет открытый исходный код.' } ,
+      source: { q: 'Где найти код?', a: 'Все открыто в нашей организации на GitHub.' },
+      ytmusic: { q: 'Нужен ли YouTube Premium?', a: 'Нет, приложение работает без подписки через InnerTube.' },
+      download: { q: 'Есть ли в Play Store?', a: 'Из-за политики Google приложение доступно только на GitHub и IzzyOnDroid.' },
+      safety: { q: 'Это безопасно?', a: 'Да, приложение имеет открытый исходный код и проверено сообществом.' }
     }
   },
   ja: {
@@ -932,6 +956,15 @@ const messages = {
         telegram: 'Telegram チャンネル',
         github: 'GitHub 組織'
       }
+    },
+    faq: {
+      title: 'よくある質問',
+      subtitle: 'ご不明な点はありますか？ここでお答えします。',
+      cost: { q: '無料ですか？', a: 'はい、Vivi Musicは完全に無料で、オープンソースです。' },
+      source: { q: 'ソースコードはどこにありますか？', a: 'GitHubの公式オーガニゼーションですべて公開されています。' },
+      ytmusic: { q: 'YouTube Premiumが必要ですか？', a: 'いいえ、InnerTube APIを利用しているため、サブスクリプションなしで動作します。' },
+      download: { q: 'Play ストアにありますか？', a: 'Googleのポリシーにより、GitHubまたはIzzyOnDroidからのみ入手可能です。' },
+      safety: { q: '安全ですか？', a: 'はい、アプリはオープンソースであり、コミュニティによって検証されています。' }
     }
   },
   ko: {
@@ -1083,6 +1116,15 @@ const messages = {
         telegram: '텔레그램 채널',
         github: 'GitHub 조직'
       }
+    },
+    faq: {
+      title: '자주 묻는 질문',
+      subtitle: '궁금한 점이 있으신가요? 답변해 드립니다.',
+      cost: { q: '무료인가요?', a: '네, Vivi Music은 100% 무료이며 오픈 소스입니다.' },
+      source: { q: '코드는 어디서 볼 수 있나요?', a: '모든 코드는 GitHub 조직에 공개되어 있습니다.' },
+      ytmusic: { q: 'YouTube Premium이 필요한가요?', a: '아니요, InnerTube를 통해 구독 없이 작동합니다.' },
+      download: { q: 'Play 스토어에 있나요?', a: 'Google 정책상 GitHub 및 IzzyOnDroid에서만 설치할 수 있습니다.' },
+      safety: { q: '안전한가요?', a: '네, 오픈 소스 프로젝트이며 커뮤니티의 검증을 받았습니다.' }
     }
   },
   zh: {
@@ -1234,6 +1276,15 @@ const messages = {
         telegram: '加入我们的 Telegram',
         github: '访问 GitHub 组织'
       }
+    },
+    faq: {
+      title: '常见问题',
+      subtitle: '有问题吗？我们有答案。',
+      cost: { q: '它是免费 premium 吗？', a: '是的，Vivi Music 是 100% 免费且开源的。' },
+      source: { q: '源码在哪里？', a: '所有代码都在我们的 GitHub 组织中公开。' },
+      ytmusic: { q: '需要 YouTube Premium 吗？', a: '不需要，它通过 InnerTube 运行，无需任何订阅。' },
+      download: { q: '它在 Play 商店中吗？', a: '由于 Google 的政策，它仅通过 GitHub 和 IzzyOnDroid 提供。' },
+      safety: { q: '安全吗？', a: '是的，该应用是开源的，并经过社区验证。' }
     }
   },
   ml: {
@@ -1385,6 +1436,15 @@ const messages = {
         telegram: 'ടെലിഗ്രാം ചാനൽ',
         github: 'ഗിറ്റ്ഹബ് ഓർഗനൈസേഷൻ'
       }
+    },
+    faq: {
+      title: 'പതിവായി ചോദിക്കുന്ന ചോദ്യങ്ങൾ',
+      subtitle: 'ചോദ്യങ്ങളുണ്ടോ? ഞങ്ങളുടെ പക്കൽ ഉത്തരങ്ങളുണ്ട്.',
+      cost: { q: 'ഇത് സസൗജന്യമാണോ?', a: 'അതെ, വിവി മ്യൂസിക് 100% സൗജന്യവും ഓപ്പൺ സോഴ്സുമാണ്.' },
+      source: { q: 'കോഡ് എവിടെ ലഭിക്കും?', a: 'എല്ലാം ഞങ്ങളുടെ GitHub ഓർഗനൈസേഷനിൽ ലഭ്യമാണ്.' },
+      ytmusic: { q: 'യൂട്യൂബ് പ്രീമിയം ആവശ്യമാണോ?', a: 'അല്ല, ഇന്നർട്യൂബ് വഴി സബ്സ്ക്രിപ്ഷൻ ഇല്ലാതെ ഇത് പ്രവർത്തിക്കും.' },
+      download: { q: 'ഇത് പ്ലേ സ്റ്റോറിൽ ലഭ്യമാണോ?', a: 'ഗൂഗിളിന്റെ നയങ്ങൾ കാരണം ഗിറ്റ്ഹബ്, ഇസിഓൺഡ്രോയിഡ് എന്നിവ വഴി മാത്രമേ ഇത് ലഭ്യമാകൂ.' },
+      safety: { q: 'ഇത് സുരക്ഷിതമാണോ?', a: 'അതെ, ആപ്പ് ഓപ്പൺ സോഴ്സ് ആണ്, കമ്മ്യൂണിറ്റി ഇത് പരിശോധിച്ചതാണ്.' }
     }
   },
   tr: {
@@ -1536,6 +1596,15 @@ const messages = {
         telegram: 'Telegram Kanalımıza Katılın',
         github: 'GitHub Organizasyonunu Ziyaret Edin'
       }
+    },
+    faq: {
+      title: 'SSS',
+      subtitle: 'Sorularınız mı var? Cevaplarımız var.',
+      cost: { q: 'Ücretsiz mi?', a: 'Evet, Vivi Music %100 ücretsiz ve açık kaynaktır.' },
+      source: { q: 'Kodları nerede bulabilirim?', a: 'Her şey GitHub organizasyonumuzda herkese açıktır.' },
+      ytmusic: { q: 'YouTube Premium gerektiriyor mu?', a: 'Hayır, InnerTube aracılığıyla herhangi bir abonelik olmadan çalışır.' },
+      download: { q: 'Play Store\'da var mı?', a: 'Google\'ın politikaları nedeniyle yalnızca GitHub ve IzzyOnDroid üzerinden edinilebilir.' },
+      safety: { q: 'Güvenli mi?', a: 'Evet, uygulama açık kaynaktır ve topluluk tarafından doğrulanmıştır.' }
     }
   },
   pt: {
@@ -1687,6 +1756,15 @@ const messages = {
         telegram: 'Junte-se ao nosso canal no Telegram',
         github: 'Visite a Organização no GitHub'
       }
+    },
+    faq: {
+      title: 'FAQ',
+      subtitle: 'Tem perguntas? Nós temos as respostas.',
+      cost: { q: 'É gratuito?', a: 'Sim, o Vivi Music é 100% gratuito e de código aberto.' },
+      source: { q: 'Onde encontro o código?', a: 'Tudo é público em nossa organização no GitHub.' },
+      ytmusic: { q: 'Requer YouTube Premium?', a: 'Não, funciona sem qualquer assinatura através do InnerTube.' },
+      download: { q: 'Está na Play Store?', a: 'Devido às políticas do Google, está disponível apenas via GitHub e IzzyOnDroid.' },
+      safety: { q: 'É seguro?', a: 'Sim, o aplicativo é de código aberto e verificado pela comunidade.' }
     }
   }
 }

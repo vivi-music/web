@@ -18,6 +18,9 @@ The official landing page for **Vivi Music**, an open-source Android music playe
 - **Dynamic Content:** Real-time fetching of the latest version, release notes, and community contributors directly from the GitHub API.
 - **Living Backgrounds:** A dynamic background system with morphing, rotating blobs that create a sense of depth and life (`BackgroundBlobs.vue`).
 - **Lottie & Markdown:** Playful vector animations for installation steps and seamless rendering of technical changelogs using `marked`.
+- **SEO & Social Presence:** Professional Open Graph and Twitter Card metadata for high-quality previews on Discord, Twitter, and social platforms.
+- **PWA & Homescreen:** Fully installable as a web app (PWA) on mobile devices with custom manifest support and brand-matched theme colors.
+- **Polished UX:** Integrated scroll progress tracking and dynamic scrollbar styling that automatically synchronizes with your chosen accent colors.
 
 ---
 
@@ -29,6 +32,7 @@ This project follows modern development best practices to ensure scalability and
 - **Modular Barrel Files:** Clean and maintainable imports via central index files in `src/components/` and `src/composables/`.
 - **Code Splitting:** Lazy loading of "below-the-fold" sections (FeatureGrid, InstallSection, etc.) using `defineAsyncComponent` to minimize initial bundle size and improve LCP.
 - **Lazy Reveal Animations:** Intersection Observer-based transitions that reveal components only when they enter the viewport, reducing initial rendering overhead.
+- **Accessibility (A11y):** Semantic HTML structure with `aria-label` and `aria-hidden` support to ensure a professional experience for screen reader users.
 - **Shared State Composables:** Efficient state management for API data to prevent redundant network requests across different components.
 
 ---
@@ -77,7 +81,7 @@ Powered by `vue-i18n`, the site dynamically translates all content based on brow
 
 ```text
 vivi-music-website/
-├── public/              # Static assets & Lottie JSON files
+├── public/              # Static assets, Lottie JSON, PWA Manifest & SEO
 ├── src/
 │   ├── assets/          
 │   │   ├── css/         # Global Material 3 color variables (base.css)
@@ -90,7 +94,9 @@ vivi-music-website/
 │   │   ├── FeatureGrid.vue
 │   │   ├── ScreenshotShowcase.vue
 │   │   ├── InstallSection.vue
+│   │   ├── FaqSection.vue
 │   │   ├── ContributeSection.vue
+│   │   ├── AppFooter.vue
 │   │   └── ChangelogModal.vue
 │   ├── composables/     # Reusable logic (Hooks)
 │   │   ├── index.js     # Composables Barrel-file

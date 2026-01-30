@@ -33,7 +33,7 @@ export default defineConfig({
     'm3-btn-surface': 'm3-btn bg-surfaceContainer border border-border/50 text-text hover:bg-surfaceVariant hover:-translate-y-1',
     
     'm3-title': 'text-5xl font-black tracking-tight leading-tight',
-    'm3-title-gradient': 'm3-title bg-clip-text text-transparent bg-gradient-to-r from-primary via-tertiary to-secondary animate-gradient-x',
+    'm3-title-gradient': 'm3-title bg-clip-text text-transparent bg-gradient-to-r from-primary via-tertiary to-secondary',
     
     // Animationen & Effekte
     'hover-bounce': 'hover:scale-[1.02] active:scale-[0.98]',
