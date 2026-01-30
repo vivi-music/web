@@ -1,8 +1,9 @@
 <script setup>
 /**
- * ScreenshotShowcase.vue
- * Präsentiert die App-Oberfläche in stilisierten Smartphone-Frames.
- * Nutzt Intersection Observer für Performance und Einblend-Effekte.
+ * ScreenshotShowcase component.
+ * This component showcases the app's user interface within stylized smartphone 
+ * frames (mockups). It uses Intersection Observer to trigger reveal animations 
+ * only when the section is visible to the user.
  */
 import { shallowRef } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -22,7 +23,7 @@ const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.05, once: t
            ref="sectionRef"
            class="m3-section transition-all duration-1000"
            :class="isVisible ? 'opacity-100' : 'opacity-0 translate-y-20'">
-    <!-- Background Decoration -->
+    <!-- Decorative background blobs for visual flair -->
     <div class="absolute top-1/2 left-0 w-64 h-64 md:w-96 md:h-96 bg-primary/5 blur-[60px] md:blur-[120px] rounded-full -translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
     <div class="absolute top-1/2 right-0 w-64 h-64 md:w-96 md:h-96 bg-tertiary/5 blur-[60px] md:blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
@@ -33,7 +34,7 @@ const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.05, once: t
 
     <div class="flex flex-wrap justify-center gap-12 px-6 max-w-[1400px] mx-auto relative z-10">
 
-      <!-- Screen 1: Home / Discovery -->
+      <!-- Screen 1: Home / Discovery Interface -->
       <div class="pixel-frame hover:-translate-y-4 transition-all duration-700 ease-out group will-change-transform">
         <div class="pixel-camera"></div>
         <div class="pixel-screen bg-surfaceContainer p-5 pt-12 flex flex-col overflow-hidden">
@@ -80,7 +81,7 @@ const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.05, once: t
         </div>
       </div>
 
-      <!-- Screen 2: Now Playing (The centerpiece) -->
+      <!-- Screen 2: Now Playing (The central focus point) -->
       <div class="pixel-frame hover:-translate-y-4 transition-all duration-700 ease-out delay-75 scale-105 z-20 shadow-primary/20 will-change-transform">
         <div class="pixel-camera"></div>
         <div class="pixel-screen bg-surface p-0 flex flex-col relative overflow-hidden">
@@ -137,7 +138,7 @@ const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.05, once: t
         </div>
       </div>
 
-      <!-- Screen 3: Library / Playlists -->
+      <!-- Screen 3: Library & Playlist Management -->
       <div class="pixel-frame hover:-translate-y-4 transition-all duration-700 ease-out delay-150">
         <div class="pixel-camera"></div>
         <div class="pixel-screen bg-surfaceContainer flex flex-col pt-12 px-6">
@@ -168,7 +169,7 @@ const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.05, once: t
         </div>
       </div>
 
-      <!-- Screen 4: Explore / Search -->
+      <!-- Screen 4: Explore & Search Interface -->
       <div class="pixel-frame hover:-translate-y-4 transition-all duration-700 ease-out delay-200">
         <div class="pixel-camera"></div>
         <div class="pixel-screen bg-surfaceContainer flex flex-col pt-12">

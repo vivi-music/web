@@ -1,7 +1,8 @@
 /**
  * @file i18n.js
- * @description Internationalisierungskonfiguration für Vivi Music.
- * Unterstützt EN, DE, RU, FR, ML, ES, JA, KO, ZH, TR, PT mit automatischer Erkennung.
+ * @description Internationalization (i18n) configuration for the Vivi Music website.
+ * This setup supports 11 languages (EN, DE, RU, FR, ML, ES, JA, KO, ZH, TR, PT) 
+ * and handles automatic browser language detection.
  * @module i18n
  */
 import { createI18n } from 'vue-i18n'
@@ -119,6 +120,10 @@ const messages = {
       btn_izzy: 'Get it on IzzyOnDroid',
       btn_github: 'View Assets',
       safety_note: 'Verified & Secure APKs',
+      qr: {
+        title: 'Scan to Download',
+        desc: 'Point your phone\'s camera at this code to open the latest release directly on your device.'
+      },
       step1: {
         title: 'Download',
         desc: 'Pick a source above and download the latest APK file to your Android device.'
@@ -279,6 +284,10 @@ const messages = {
       btn_izzy: 'Bei IzzyOnDroid laden',
       btn_github: 'Assets ansehen',
       safety_note: 'Verifizierte & Sichere APKs',
+      qr: {
+        title: 'QR-Code scannen',
+        desc: 'Richte die Kamera deines Handys auf diesen Code, um die aktuellste Version direkt auf deinem Gerät zu öffnen.'
+      },
       step1: {
         title: 'Herunterladen',
         desc: 'Wähle eine Quelle oben und lade die aktuellste APK-Datei auf dein Android-Gerät.'
@@ -1770,7 +1779,10 @@ const messages = {
 }
 
 /**
- * Ermittelt die beste Sprache basierend auf User-Settings und Browser.
+ * Determines the best language to display based on:
+ * 1. Previously saved user preference (localStorage)
+ * 2. Browser language settings (navigator.language)
+ * Defaults to English if no match is found.
  */
 const getBrowserLocale = () => {
   const saved = localStorage.getItem('vivi-locale')

@@ -24,7 +24,7 @@ onMounted(() => {
            ref="sectionRef"
            class="m3-section transition-all duration-1000"
            :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'">
-    <!-- Expressive Background Elements -->
+    <!-- Expressive Decorative Background Elements -->
     <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-tertiary/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
     <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 blur-[100px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
 
@@ -36,7 +36,7 @@ onMounted(() => {
       </div>
 
       <div class="m3-grid-3 mb-32">
-        <!-- Fork Card -->
+        <!-- Fork Card: Encourages users to fork the repository on GitHub -->
         <a href="https://github.com/vivizzz007/vivi-music/fork" target="_blank" rel="noopener noreferrer"
            class="group p-10 m3-card-expressive decoration-none flex flex-col items-center text-center"
            :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'">
@@ -47,7 +47,7 @@ onMounted(() => {
           <p class="text-sm text-textDim leading-relaxed opacity-80">{{ t('contribute.fork.desc') }}</p>
         </a>
 
-        <!-- Debug Card -->
+        <!-- Debug Card: Direct link to the source code for local debugging -->
         <a href="https://github.com/vivizzz007/vivi-music" target="_blank" rel="noopener noreferrer"
            class="group p-10 m3-card-expressive hover:border-tertiary/50 hover:shadow-tertiary/20 decoration-none flex flex-col items-center text-center delay-100"
            :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'">
@@ -58,7 +58,7 @@ onMounted(() => {
           <p class="text-sm text-textDim leading-relaxed opacity-80">{{ t('contribute.debug.desc') }}</p>
         </a>
 
-        <!-- PR Card -->
+        <!-- PR Card: Guides users to submit pull requests -->
         <a href="https://github.com/vivizzz007/vivi-music/pulls" target="_blank" rel="noopener noreferrer"
            class="group p-10 m3-card-expressive hover:border-accent/50 hover:shadow-accent/20 decoration-none flex flex-col items-center text-center delay-200"
            :class="isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'">
@@ -72,11 +72,11 @@ onMounted(() => {
 
       <div v-if="contributors.length > 0" class="relative transition-all duration-1000 delay-300"
            :class="isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'">
-        <!-- Community Card Decoration -->
+        <!-- Community Section Background Decoration -->
         <div class="absolute inset-0 bg-surfaceVariant/5 rounded-[3.5rem] border border-border/20 blur-sm -z-10"></div>
         
         <div class="p-12 text-center">
-          <!-- Live Stats Row -->
+          <!-- Live Repository Stats: Shows real-time data fetched from GitHub -->
           <div class="flex flex-wrap justify-center gap-8 mb-12">
             <div v-for="stat in [
               { label: 'Stars', value: stats.stars, icon: 'i-fa6-solid-star', color: 'text-yellow-500' },

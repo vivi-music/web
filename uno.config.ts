@@ -14,13 +14,15 @@ export default defineConfig({
     }),
   ],
   shortcuts: {
-    // Layout & Struktur (OOCSS Objects)
+    // Layout & Structure (OOCSS Objects)
+    // These classes define the structural layout of the page sections.
     'm3-section': 'py-24 relative overflow-hidden',
     'm3-container': 'max-w-7xl mx-auto px-6 relative z-10',
     'm3-grid-2': 'grid md:grid-cols-2 gap-8',
     'm3-grid-3': 'grid md:grid-cols-3 gap-8',
     
-    // Komponenten (OOCSS Objects + Skins)
+    // Components (OOCSS Objects + Skins)
+    // These shortcuts combine structural rules with visual styles (skins) for UI elements.
     'm3-card': 'rounded-[2.5rem] bg-surface/80 md:bg-surface/50 backdrop-blur-md md:backdrop-blur-xl border border-border/50 transition-all duration-500',
     'm3-card-hover': 'hover:-translate-y-3 hover:shadow-2xl',
     'm3-card-expressive': 'm3-card m3-card-hover hover:border-primary/50',
@@ -35,13 +37,14 @@ export default defineConfig({
     'm3-title': 'text-5xl font-black tracking-tight leading-tight',
     'm3-title-gradient': 'm3-title bg-clip-text text-transparent bg-gradient-to-r from-primary via-tertiary to-secondary',
     
-    // Animationen & Effekte
+    // Animations & Visual Effects
     'hover-bounce': 'hover:scale-[1.02] active:scale-[0.98]',
     'glass-panel': 'bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl',
   },
   theme: {
     colors: {
-      // WICHTIG: %alpha ermöglicht Opacity (z.B. text-primary/80)
+      // IMPORTANT: Using %alpha allows UnoCSS to apply opacity (e.g., text-primary/80)
+      // These colors are mapped to CSS variables defined in base.css
       primary: 'rgba(var(--c-primary-rgb), %alpha)',
       onPrimary: 'rgba(var(--c-on-primary-rgb), %alpha)',
       

@@ -13,8 +13,11 @@ The official landing page for **Vivi Music**, an open-source Android music playe
 ## 🚀 Core Features
 
 - **Material 3 Expressive (M3E) Design:** A high-energy, vibrant UI featuring dynamic accent colors, organic shapes (`rounded-[2.5rem]`), and glassmorphism.
+- **Custom Dynamic Theming:** A built-in Material 3 color engine that allows users to choose any accent color via a real-time color picker, instantly updating the entire site's palette.
 - **Pixel 10 Pro XL Mockups:** High-fidelity 3D device frames presenting the app's interface in a modern flagship context with realistic camera and depth effects.
 - **Interactive 3D Motion:** An immersive Hero section with smooth 3D tilt effects powered by a Lerp-based smoothing algorithm and parallax depth.
+- **Audio Visualizer:** A dynamic, beat-synced CSS spectral visualizer integrated into the smartphone mockup, emphasizing the music-centric theme.
+- **QR Code App Delivery:** Integrated desktop-to-mobile handoff allowing users to scan a QR code for instant APK downloads on their mobile devices.
 - **Dynamic Content:** Real-time fetching of the latest version, release notes, and community contributors directly from the GitHub API.
  - **Living Backgrounds:** A dynamic background system with morphing, rotating blobs that create a sense of depth and life (`AppBackground.vue`).
 - **Expressive Motion:** High-energy, CSS-powered SVG animations for installation steps that react to dynamic theme colors.
@@ -32,7 +35,7 @@ This project follows modern development best practices to ensure scalability and
 - **Modular Barrel Files:** Clean and maintainable imports via central index files in `src/components/` and `src/composables/`.
 - **Code Splitting:** Lazy loading of "below-the-fold" sections (FeatureGrid, InstallSection, etc.) using `defineAsyncComponent` to minimize initial bundle size and improve LCP.
 - **Lazy Reveal Animations:** Intersection Observer-based transitions that reveal components only when they enter the viewport, reducing initial rendering overhead.
-- **Accessibility (A11y):** Semantic HTML structure with `aria-label` and `aria-hidden` support to ensure a professional experience for screen reader users.
+- **Accessibility (A11y):** Semantic HTML structure with `aria-label`, `aria-hidden`, and global `focus-visible` ring styles to ensure an excellent experience for keyboard and screen reader users.
 - **Shared State Composables:** Efficient state management for API data to prevent redundant network requests across different components.
 
 ---
@@ -95,14 +98,17 @@ vivi-music-website/
 │   │   ├── ScreenshotShowcase.vue
 │   │   ├── InstallSection.vue
 │   │   ├── FaqSection.vue
+│   │   ├── QrCodeModal.vue
 │   │   ├── ContributeSection.vue
 │   │   ├── AppFooter.vue
 │   │   └── ChangelogModal.vue
 │   ├── composables/     # Reusable logic (Hooks)
 │   │   ├── index.js     # Composables Barrel-file
 │   │   ├── useTheme.js
+│   │   ├── useDynamicColor.js
 │   │   ├── useTilt.js
 │   │   ├── useGithubRelease.js
+│   │   ├── useGithubRepo.js
 │   │   ├── useGithubContributors.js
 │   │   └── useIntersectionObserver.js
 │   ├── i18n.js          # Translation dictionaries

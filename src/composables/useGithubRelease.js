@@ -1,16 +1,18 @@
 ﻿/**
  * @file useGithubRelease.js
- * @description Composable zur Interaktion mit der GitHub Releases API.
- * Kapselt die Logik zum Abrufen der neuesten Versionsinformationen.
- * * @module composables/useGithubRelease
- * @author Vivi Music Team
+ * @description Composable for interacting with the GitHub Releases API.
+ * This module encapsulates the logic for fetching the latest version information 
+ * and release notes for the Vivi Music app.
+ * @module composables/useGithubRelease
  */
 
 import { ref } from 'vue'
 
 // --- SHARED STATE ---
-// We move these outside the function so that multiple components (e.g., Hero and Footer)
-// share the same data and state without redundant API calls.
+// These variables are defined outside the function so that they maintain a global 
+// singleton state across the entire application. Multiple components (e.g., Hero 
+// and Footer) can use this composable simultaneously without triggering 
+// redundant network requests.
 const latestVersion = ref(null)
 const releaseName = ref('')
 const releaseUrl = ref('https://github.com/vivizzz007/vivi-music/releases')
@@ -20,16 +22,16 @@ const error = ref(null)
 let isFetching = false
 
 /**
- * Bereitstellung der GitHub Release Daten.
- * @returns {Object} Interface mit reaktiven Referenzen und Methoden.
+ * Provides access to GitHub release data and the fetching logic.
+ * @returns {Object} An interface containing reactive references and the fetch method.
  */
 export function useGithubRelease() {
 
     /**
-     * Ruft das neueste Release asynchron von der GitHub API ab.
-     * Behandelt Fehler und setzt Fallback-Werte.
+     * Asynchronously fetches the latest release details from the GitHub API.
+     * Handles error states and provides fallback values during the loading process.
      * @async
-     * @param {string} [fallbackVersion] - Ein initialer Wert, der angezeigt wird, bis die API antwortet.
+     * @param {string} [fallbackVersion] - An initial version string to display until the API responds.
      */
     const fetchLatestRelease = async (fallbackVersion) => {
         // Prevent multiple simultaneous or redundant fetches

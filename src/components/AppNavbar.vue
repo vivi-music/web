@@ -1,14 +1,15 @@
 <script setup>
 /**
- * AppNavbar Komponente.
- * Steuert die Navigation, das Theme und die Sprachwahl.
- * Implementiert "Active State" Highlighting für Menüpunkte.
+ * AppNavbar component.
+ * This component manages the top navigation bar, including navigation links, 
+ * theme switching (Light/Dark/System), mood colors (Dynamic Hue), 
+ * and language selection.
  */
 import { ref, shallowRef, onMounted } from 'vue'
 import { useTheme, useDynamicColor } from '../composables'
 import { useI18n } from 'vue-i18n'
 
-// Wir nutzen defineOptions für eine saubere Komponenten-Identifikation (Vue 3.3+)
+// Using defineOptions for clean component identification (Vue 3.3+)
 defineOptions({
   name: 'AppNavbar'
 })
@@ -17,7 +18,8 @@ const { currentTheme, thumbPosition, setTheme } = useTheme()
 const { currentHue, colorSeeds, applyColor } = useDynamicColor()
 const { t, locale } = useI18n()
 
-// shallowRef reicht für einfache Strings völlig aus und spart Performance
+// shallowRef is sufficient for simple primitives and offers better performance 
+// than deep reactive objects for this use case.
 const activeLink = shallowRef('#features')
 const isLangMenuOpen = ref(false)
 const isHueMenuOpen = ref(false)
@@ -38,15 +40,16 @@ const languages = [
 ]
 
 /**
- * Setzt den aktiven Menüpunkt.
- * @param {string} hash - Der Anker-Link (z.B. '#features')
+ * Updates the active link state for highlighting in the menu.
+ * @param {string} hash - The anchor hash of the section (e.g., '#features').
  */
 const setActive = (hash) => {
   activeLink.value = hash
 }
 
 /**
- * Wechselt die Sprache und speichert sie.
+ * Changes the application language and persists it in localStorage.
+ * @param {string} code - The language code (e.g., 'en').
  */
 const changeLang = (code) => {
   locale.value = code
@@ -55,7 +58,8 @@ const changeLang = (code) => {
 }
 
 /**
- * Beim Laden der Seite prüfen, ob ein Hash in der URL steht.
+ * On initial mount, check if there is an existing hash in the URL 
+ * to set the correct active menu item.
  */
 onMounted(() => {
   if (window.location.hash) {
@@ -135,106 +139,120 @@ onMounted(() => {
 
       <div class="flex items-center gap-3">
 
-        <!-- Mood Selector (Dynamic Color) -->
-        <div class="relative hidden sm:block">
-          <button @click="isHueMenuOpen = !isHueMenuOpen; isLangMenuOpen = false"
-                  class="m3-icon-box-sm !w-10 h-10 bg-surfaceContainer border border-primary/20 text-primary hover:bg-surfaceVariant group cursor-pointer decoration-none"
-                  aria-label="Change Mood">
-            <div class="i-fa6-solid-palette text-base group-hover:rotate-12 transition-transform"></div>
-          </button>
+      <!-- Mood Selector (Dynamic Hue Selection) -->
+      <div class="relative hidden sm:block">
+        <button @click="isHueMenuOpen = !isHueMenuOpen; isLangMenuOpen = false"
+                class="m3-icon-box-sm !w-10 h-10 bg-surfaceContainer border border-primary/20 text-primary hover:bg-surfaceVariant group cursor-pointer decoration-none"
+                aria-label="Change Mood">
+          <div class="i-fa6-solid-palette text-base group-hover:rotate-12 transition-transform"></div>
+        </button>
 
-          <Transition name="fade">
-            <div v-if="isHueMenuOpen" 
-                 class="absolute top-14 right-0 min-w-[150px] bg-surfaceContainer border border-border/50 rounded-2xl shadow-2xl p-2 z-50 overflow-hidden backdrop-blur-3xl">
-              <button v-for="(colors, hue) in colorSeeds" 
-                      :key="hue"
-                      @click="applyColor(hue); isHueMenuOpen = false"
-                      class="w-full p-3 flex items-center gap-3 hover:bg-primary/10 transition-all rounded-xl cursor-pointer border-none bg-transparent active:scale-95"
-                      :class="currentHue === hue ? 'text-primary' : 'text-text'">
-                <div class="w-4 h-4 rounded-full" :style="{ backgroundColor: `rgb(${currentTheme === 'light' ? colors.light.primary : colors.dark.primary})` }"></div>
-                <span class="text-xs font-black uppercase tracking-wider capitalize">{{ hue }}</span>
-                <div v-if="currentHue === hue" class="i-fa6-solid-check text-[10px] ml-auto"></div>
-              </button>
-            </div>
-          </Transition>
+        <Transition name="fade">
+          <div v-if="isHueMenuOpen" 
+               class="absolute top-14 right-0 min-w-[160px] bg-surfaceContainer border border-border/50 rounded-2xl shadow-2xl p-2 z-50 overflow-hidden backdrop-blur-3xl">
+            <button v-for="(colors, hue) in colorSeeds" 
+                    :key="hue"
+                    @click="applyColor(hue); isHueMenuOpen = false"
+                    class="w-full p-3 flex items-center gap-3 hover:bg-primary/10 transition-all rounded-xl cursor-pointer border-none bg-transparent active:scale-95"
+                    :class="currentHue === hue ? 'text-primary' : 'text-text'">
+              <div class="w-4 h-4 rounded-full" :style="{ backgroundColor: `rgb(${currentTheme === 'light' ? colors.light.primary : colors.dark.primary})` }"></div>
+              <span class="text-xs font-black uppercase tracking-wider capitalize">{{ hue }}</span>
+              <div v-if="currentHue === hue" class="i-fa6-solid-check text-[10px] ml-auto"></div>
+            </button>
 
-          <div v-if="isHueMenuOpen" class="fixed inset-0 z-40" @click="isHueMenuOpen = false"></div>
-        </div>
+            <div class="h-px bg-border/10 my-1 mx-2"></div>
+            
+            <label class="w-full p-3 flex items-center gap-3 hover:bg-primary/10 transition-all rounded-xl cursor-pointer focus-within:ring-2 focus-within:ring-primary/50 outline-none">
+              <div class="w-4 h-4 rounded-full bg-gradient-to-tr from-primary via-secondary to-tertiary"></div>
+              <span class="text-xs font-black uppercase tracking-wider">Custom</span>
+              <input type="color" 
+                     class="opacity-0 absolute w-0 h-0" 
+                     @input="e => { applyColor(e.target.value); isHueMenuOpen = false }"
+                     @change="e => { applyColor(e.target.value); isHueMenuOpen = false }">
+              <div v-if="currentHue.startsWith('#')" class="i-fa6-solid-check text-[10px] ml-auto text-primary"></div>
+            </label>
+          </div>
+        </Transition>
 
-        <!-- Language Selector -->
-        <div class="relative">
-          <button @click="isLangMenuOpen = !isLangMenuOpen"
-                  class="m3-icon-box-sm !w-auto h-10 px-4 bg-surfaceContainer border border-primary/20 text-primary hover:bg-surfaceVariant group cursor-pointer decoration-none relative z-50"
-                  :aria-label="t('nav.language')">
-            <div class="i-fa6-solid-earth-americas text-base group-hover:scale-110 transition-transform"></div>
-            <span class="text-xs font-bold uppercase tracking-wide ml-2">{{ locale }}</span>
-          </button>
-
-          <!-- Dropdown Menu (M3 Expressive) -->
-          <Transition name="fade">
-            <div v-if="isLangMenuOpen" 
-                 class="absolute top-14 right-0 min-w-[180px] bg-surfaceContainer border border-border/50 rounded-2xl shadow-2xl py-3 z-50 overflow-hidden backdrop-blur-3xl">
-              <button v-for="lang in languages" 
-                      :key="lang.code"
-                      @click="changeLang(lang.code)"
-                      class="w-full px-5 py-2.5 flex items-center gap-3 hover:bg-primary/10 transition-all text-left cursor-pointer border-none bg-transparent active:scale-95"
-                      :class="locale === lang.code ? 'text-primary' : 'text-text'">
-                <span class="text-lg grayscale-[0.2] group-hover:grayscale-0">{{ lang.flag }}</span>
-                <span class="text-xs font-black uppercase tracking-wider">{{ lang.label }}</span>
-                <div v-if="locale === lang.code" class="i-fa6-solid-check text-[10px] ml-auto"></div>
-              </button>
-            </div>
-          </Transition>
-
-          <!-- Close Overlay -->
-          <div v-if="isLangMenuOpen" 
-               class="fixed inset-0 z-40" 
-               @click="isLangMenuOpen = false"></div>
-        </div>
-
-        <div class="bg-surfaceContainer rounded-full relative w-[104px] h-[40px] flex items-center justify-between px-1 border border-border">
-          <div class="absolute top-[4px] left-[4px] w-[32px] h-[32px] bg-primary rounded-full transition-transform duration-300 z-10 shadow-[0_2px_8px_rgba(var(--c-primary-rgb),0.3)]"
-               :style="{ transform: `translateX(${thumbPosition}px)` }"></div>
-
-          <button @click="setTheme('light', 0)"
-                  class="flex-1 h-full flex items-center justify-center z-20 cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none"
-                  :class="currentTheme === 'light' ? 'text-onPrimary' : 'text-text/60 hover:text-text'"
-                  :aria-label="t('nav.theme.light')">
-            <div class="i-fa6-solid-sun text-sm transition-transform active:scale-90"></div>
-          </button>
-
-          <button @click="setTheme('system', 32)"
-                  class="flex-1 h-full flex items-center justify-center z-20 cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none"
-                  :class="currentTheme === 'system' ? 'text-onPrimary' : 'text-text/60 hover:text-text'"
-                  :aria-label="t('nav.theme.system')">
-            <div class="i-fa6-solid-circle-half-stroke text-sm transition-transform active:scale-90"></div>
-          </button>
-
-          <button @click="setTheme('dark', 64)"
-                  class="flex-1 h-full flex items-center justify-center z-20 cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none"
-                  :class="currentTheme === 'dark' ? 'text-onPrimary' : 'text-text/60 hover:text-text'"
-                  :aria-label="t('nav.theme.dark')">
-            <div class="i-fa6-solid-moon text-sm transition-transform active:scale-90"></div>
-          </button>
-        </div>
-
-        <a href="https://github.com/vivimusic-app-team/web" target="_blank"
-           class="w-10 h-10 flex items-center justify-center rounded-full text-text/60 hover:text-text hover:bg-surfaceVariant transition-all active:scale-95 decoration-none"
-           :aria-label="t('nav.theme.github')">
-          <div class="i-fa6-brands-github text-xl"></div>
-        </a>
+        <!-- Global overlay to close the hue menu when clicking outside -->
+        <div v-if="isHueMenuOpen" class="fixed inset-0 z-40" @click="isHueMenuOpen = false"></div>
       </div>
-    </div>
 
-    <!-- Mobile Menu Drawer (M3 Expressive) -->
-    <Transition name="drawer">
-      <div v-if="isMobileMenuOpen" 
-           class="fixed inset-0 z-50 md:hidden flex justify-end">
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="isMobileMenuOpen = false"></div>
-        
-        <!-- Drawer Panel -->
-        <div class="relative w-80 h-full bg-surface border-l border-border/50 shadow-2xl p-8 flex flex-col gap-8 transition-all duration-500 ease-out translate-x-0">
+      <!-- Language Selector -->
+      <div class="relative">
+        <button @click="isLangMenuOpen = !isLangMenuOpen"
+                class="m3-icon-box-sm !w-auto h-10 px-4 bg-surfaceContainer border border-primary/20 text-primary hover:bg-surfaceVariant group cursor-pointer decoration-none relative z-50"
+                :aria-label="t('nav.language')">
+          <div class="i-fa6-solid-earth-americas text-base group-hover:scale-110 transition-transform"></div>
+          <span class="text-xs font-bold uppercase tracking-wide ml-2">{{ locale }}</span>
+        </button>
+
+        <!-- Dropdown Menu (Material 3 Expressive Style) -->
+        <Transition name="fade">
+          <div v-if="isLangMenuOpen" 
+               class="absolute top-14 right-0 min-w-[180px] bg-surfaceContainer border border-border/50 rounded-2xl shadow-2xl py-3 z-50 overflow-hidden backdrop-blur-3xl">
+            <button v-for="lang in languages" 
+                    :key="lang.code"
+                    @click="changeLang(lang.code)"
+                    class="w-full px-5 py-2.5 flex items-center gap-3 hover:bg-primary/10 transition-all text-left cursor-pointer border-none bg-transparent active:scale-95"
+                    :class="locale === lang.code ? 'text-primary' : 'text-text'">
+              <span class="text-lg grayscale-[0.2] group-hover:grayscale-0">{{ lang.flag }}</span>
+              <span class="text-xs font-black uppercase tracking-wider">{{ lang.label }}</span>
+              <div v-if="locale === lang.code" class="i-fa6-solid-check text-[10px] ml-auto"></div>
+            </button>
+          </div>
+        </Transition>
+
+        <!-- Global overlay to close the language menu when clicking outside -->
+        <div v-if="isLangMenuOpen" 
+             class="fixed inset-0 z-40" 
+             @click="isLangMenuOpen = false"></div>
+      </div>
+
+      <!-- Theme Switcher (Light / System / Dark) -->
+      <div class="bg-surfaceContainer rounded-full relative w-[104px] h-[40px] flex items-center justify-between px-1 border border-border">
+        <div class="absolute top-[4px] left-[4px] w-[32px] h-[32px] bg-primary rounded-full transition-transform duration-300 z-10 shadow-[0_2px_8px_rgba(var(--c-primary-rgb),0.3)]"
+             :style="{ transform: `translateX(${thumbPosition}px)` }"></div>
+
+        <button @click="setTheme('light', 0)"
+                class="flex-1 h-full flex items-center justify-center z-20 cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none"
+                :class="currentTheme === 'light' ? 'text-onPrimary' : 'text-text/60 hover:text-text'"
+                :aria-label="t('nav.theme.light')">
+          <div class="i-fa6-solid-sun text-sm transition-transform active:scale-90"></div>
+        </button>
+
+        <button @click="setTheme('system', 32)"
+                class="flex-1 h-full flex items-center justify-center z-20 cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none"
+                :class="currentTheme === 'system' ? 'text-onPrimary' : 'text-text/60 hover:text-text'"
+                :aria-label="t('nav.theme.system')">
+          <div class="i-fa6-solid-circle-half-stroke text-sm transition-transform active:scale-90"></div>
+        </button>
+
+        <button @click="setTheme('dark', 64)"
+                class="flex-1 h-full flex items-center justify-center z-20 cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none"
+                :class="currentTheme === 'dark' ? 'text-onPrimary' : 'text-text/60 hover:text-text'"
+                :aria-label="t('nav.theme.dark')">
+          <div class="i-fa6-solid-moon text-sm transition-transform active:scale-90"></div>
+        </button>
+      </div>
+
+      <a href="https://github.com/vivimusic-app-team/web" target="_blank"
+         class="w-10 h-10 flex items-center justify-center rounded-full text-text/60 hover:text-text hover:bg-surfaceVariant transition-all active:scale-95 decoration-none"
+         :aria-label="t('nav.theme.github')">
+        <div class="i-fa6-brands-github text-xl"></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Navigation Drawer -->
+  <Transition name="drawer">
+    <div v-if="isMobileMenuOpen" 
+         class="fixed inset-0 z-50 md:hidden flex justify-end">
+      <!-- Backdrop: Darkens the background when the menu is open -->
+      <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="isMobileMenuOpen = false"></div>
+      
+      <!-- Drawer Panel: The actual sliding menu container -->
+      <div class="relative w-80 h-full bg-surface border-l border-border/50 shadow-2xl p-8 flex flex-col gap-8 transition-all duration-500 ease-out translate-x-0">
           <div class="flex items-center gap-4 mb-4">
             <img src="/assets/LogoSmall.png" width="40" height="40" loading="lazy" class="w-10 h-10 object-contain" alt="Vivi Music Logo" />
             <span class="font-black text-xl tracking-tight text-text">Vivi Music</span>

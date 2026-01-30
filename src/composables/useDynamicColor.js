@@ -22,14 +22,33 @@ export function useDynamicColor() {
     }
   }
 
+  const hexToRgb = (hex) => {
+    const r = parseInt(hex.slice(1, 3), 16)
+    const g = parseInt(hex.slice(3, 5), 16)
+    const b = parseInt(hex.slice(5, 7), 16)
+    return `${r}, ${g}, ${b}`
+  }
+
   const applyColor = (hue) => {
     currentHue.value = hue
     const root = document.documentElement
-    const colors = colorSeeds[hue]
+    
+    if (hue.startsWith('#')) {
+      const rgb = hexToRgb(hue)
+      // For custom colors, we use the same primary for now, 
+      // but could derive variants in the future.
+      root.style.setProperty('--c-primary-rgb-light', rgb)
+      root.style.setProperty('--c-primary-rgb-dark', rgb)
+      localStorage.setItem('vivi-hue', hue)
+      return
+    }
 
-    // Wir setzen Variablen für Light und Dark separat via CSS Selektoren
-    // Aber hier im JS überschreiben wir sie direkt am Root (was beide überschreibt, wenn wir nicht aufpassen)
-    // Besser: Wir nutzen separate Variablen --c-primary-rgb-dynamic etc.
+    const colors = colorSeeds[hue]
+    if (!colors) return
+
+    // We set variables for Light and Dark themes separately using CSS custom properties.
+    // By updating these at the root level, all components that use these variables 
+    // will reactively update their colors.
     
     Object.entries(colors.light).forEach(([key, val]) => {
       root.style.setProperty(`--c-${key}-rgb-light`, val)

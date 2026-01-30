@@ -1,22 +1,27 @@
 <script setup>
 /**
  * @file HeroSection.vue
- * @description Hauptbereich der Landing Page mit 3D-Smartphone und dynamischen Release-Daten.
+ * @description The Hero section of the landing page. It features a high-fidelity 
+ * 3D smartphone mockup (Pixel 10 Pro XL) with interactive tilt effects and 
+ * fetches the latest release data from the GitHub API.
  */
 import { ref, shallowRef, onMounted, defineAsyncComponent } from 'vue'
 import { useTilt, useGithubRelease } from '../composables'
 import { useI18n } from 'vue-i18n'
 
 const ChangelogModal = defineAsyncComponent(() => import('./ChangelogModal.vue'))
+const QrCodeModal = defineAsyncComponent(() => import('./QrCodeModal.vue'))
 
 defineOptions({
   name: 'HeroSection'
 })
 
 const { t } = useI18n()
-// shallowRef für DOM-Elemente spart Overhead
+
+// Use shallowRef for DOM elements to avoid unnecessary reactivity overhead.
 const phoneRef = shallowRef(null)
 const showChangelog = ref(false)
+const showQrCode = ref(false)
 
 const {
   latestVersion,
@@ -45,6 +50,7 @@ const prevTrack = () => {
 }
 
 onMounted(() => {
+  // Fetch the latest release information from GitHub API on component mount.
   fetchLatestRelease()
 })
 </script>
@@ -103,6 +109,13 @@ onMounted(() => {
             <div class="i-fa6-solid-layer-group text-xl group-hover:scale-110 transition-transform"></div>
             <span>{{ t('hero.btn_features') }}</span>
           </a>
+
+          <!-- QR Code Trigger (Hidden on small mobile screens where scanning isn't needed) -->
+          <button @click="showQrCode = true"
+                  class="hidden sm:flex m3-icon-box-sm !w-auto !h-auto !p-4 bg-surfaceContainer border border-primary/20 text-primary hover:bg-surfaceVariant hover:scale-110 transition-all cursor-pointer group"
+                  :aria-label="t('install.qr.title')">
+            <div class="i-fa6-solid-qrcode text-2xl group-hover:rotate-6 transition-transform"></div>
+          </button>
         </div>
 
         <button
@@ -122,7 +135,7 @@ onMounted(() => {
           <div ref="phoneRef" class="pixel-frame m-auto transform-style-3d shadow-2xl will-change-transform">
             <div class="pixel-camera"></div>
 
-            <!-- Glossy Glare Effect -->
+            <!-- Glossy Glare Effect: Simulates light reflecting off the screen glass -->
             <div class="absolute inset-0 rounded-[4rem] overflow-hidden pointer-events-none z-50">
               <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               <div class="glare-effect"></div>
@@ -140,10 +153,23 @@ onMounted(() => {
                   <div class="i-fa6-solid-ellipsis-vertical cursor-pointer hover:text-primary transition-colors" role="button" aria-label="Options"></div>
                 </div>
 
-                <!-- Album Art with Parallax -->
+                <!-- Album Art with Parallax: Creates an immersive 3D depth effect -->
                 <div class="aspect-square rounded-[2rem] bg-surfaceContainer/50 backdrop-blur-md shadow-2xl mb-8 relative border border-white/10 flex items-center justify-center overflow-hidden group parallax-element" 
                      style="--parallax-depth: 60px">
                   <div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  
+                  <!-- Visualizer overlay when playing -->
+                  <div class="absolute bottom-0 left-0 right-0 h-24 flex items-end justify-center gap-1.5 px-6 pb-6 pointer-events-none transition-opacity duration-500"
+                       :class="isPlaying ? 'opacity-100' : 'opacity-0'">
+                    <div v-for="i in 12" :key="i" 
+                         class="w-1.5 bg-primary/60 rounded-full animate-visualizer"
+                         :style="{ 
+                           height: `${20 + Math.random() * 80}%`,
+                           animationDelay: `${i * 0.1}s`,
+                           animationDuration: `${0.5 + Math.random() * 0.5}s`
+                         }"></div>
+                  </div>
+
                   <div class="i-fa6-solid-music text-7xl text-white/10 group-hover:scale-110 transition-transform duration-500"
                        :class="{ 'animate-spin-slow': isPlaying }"></div>
                 </div>
@@ -186,6 +212,10 @@ onMounted(() => {
           :content="releaseDescription"
           @close="showChangelog = false"
       />
+      <QrCodeModal
+          :show="showQrCode"
+          @close="showQrCode = false"
+      />
     </Teleport>
   </header>
 </template>
@@ -199,7 +229,20 @@ onMounted(() => {
   animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Glare Effect */
+@keyframes visualizer {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.4); }
+}
+.animate-visualizer {
+  animation: visualizer 1s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+/* 
+ * Glare Effect Styles.
+ * Creates a radial gradient that moves with the tilt of the device 
+ * to simulate realistic light reflections.
+ */
 .glare-effect {
   --tilt-x: 0deg;
   --tilt-y: 0deg;
@@ -215,7 +258,11 @@ onMounted(() => {
   transition: transform 0.1s ease-out;
 }
 
-/* Parallax Elements */
+/* 
+ * Parallax Element Styles.
+ * Shifts elements along the Z-axis to create a layered 3D depth effect 
+ * when the parent container is tilted.
+ */
 .parallax-element {
   transform: translateZ(var(--parallax-depth, 20px));
   transition: transform 0.1s ease-out;

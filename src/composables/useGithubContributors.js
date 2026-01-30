@@ -4,7 +4,8 @@ export function useGithubContributors() {
     const contributors = ref([])
     const isLoading = ref(true)
 
-    // API Endpunkt (max 30 Contributors per Default, kann via ?per_page=100 erhöht werden)
+    // API Endpoint for fetching contributors.
+    // By default, GitHub returns 30 items. We increase this to 100 to ensure we catch everyone.
     const API_URL = 'https://api.github.com/repos/vivizzz007/vivi-music/contributors?per_page=100'
 
     const fetchContributors = async () => {
@@ -12,7 +13,7 @@ export function useGithubContributors() {
             const response = await fetch(API_URL)
             if (response.ok) {
                 const data = await response.json()
-                // Wir filtern Bots heraus (optional, oft haben Bots 'type': 'Bot')
+                // Filter out automated accounts (Bots) to only show human contributors.
                 contributors.value = data.filter(user => user.type !== 'Bot')
             }
         } catch (error) {

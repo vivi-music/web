@@ -1,14 +1,19 @@
 <script setup>
 /**
- * Hauptkomponente der Anwendung.
- * Nutzt Async Components für verbesserte Performance (Code Splitting).
+ * Main App component.
+ * This is the root layout that organizes all sections and handles global features like 
+ * the scroll progress bar and the 'Scroll to Top' button.
+ * 
+ * We use Async Components (Lazy Loading) for sections that are not immediately visible 
+ * to improve initial loading speed (Performance Optimization).
  */
 import { defineAsyncComponent, ref, onMounted, onUnmounted } from 'vue'
 import AppNavbar from './components/AppNavbar.vue'
 import HeroSection from './components/HeroSection.vue'
 import AppBackground from './components/AppBackground.vue'
 
-// Below-the-fold Komponenten werden erst bei Bedarf geladen
+// Below-the-fold components are loaded only when needed (Code Splitting).
+// This keeps the initial JavaScript bundle small and makes the page load faster.
 const FeatureGrid = defineAsyncComponent(() => import('./components/FeatureGrid.vue'))
 const ScreenshotShowcase = defineAsyncComponent(() => import('./components/ScreenshotShowcase.vue'))
 const InstallSection = defineAsyncComponent(() => import('./components/InstallSection.vue'))
@@ -73,7 +78,8 @@ onUnmounted(() => {
 
     <AppFooter />
 
-    <!-- Scroll to Top Button (M3 Fab style) -->
+    <!-- Scroll to Top Button (Material 3 FAB style) -->
+    <!-- This button only appears when the user has scrolled down significantly -->
     <Transition name="fade">
       <button
           v-if="showScrollTop"

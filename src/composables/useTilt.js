@@ -1,39 +1,40 @@
 import { ref, shallowRef, onMounted, onUnmounted } from 'vue'
 
 /**
- * Composable für 3D-Kipp-Effekte basierend auf Mausposition oder Gyroskop.
- * Unterstützt iOS 13+ Permission-Requests.
+ * Composable for 3D tilt effects based on mouse position or device gyroscope.
+ * Includes support for iOS 13+ permission requests for orientation sensors.
  *
- * @param {import('vue').Ref<HTMLElement>} elementRef - Referenz auf das zu bewegende DOM-Element.
- * @returns {Object} Interface zur Steuerung der Sensoren.
+ * @param {import('vue').Ref<HTMLElement>} elementRef - Reference to the DOM element to be tilted.
+ * @returns {Object} Control interface for the sensors and permission state.
  */
 export function useTilt(elementRef) {
-  // Konfiguration für Empfindlichkeit und Glättung
+  // Configuration for tilt sensitivity and animation smoothing.
   const CONFIG = {
-    maxRotation: 15,    // Max Neigung in Grad
-    mouseFactor: 0.05,  // Empfindlichkeit Maus
-    gyroFactor: 1.2,    // Verstärkung für Gyro
-    smoothing: 0.1      // Glättungsfaktor (Lerp)
+    maxRotation: 15,    // Maximum tilt angle in degrees.
+    mouseFactor: 0.05,  // Sensitivity multiplier for mouse movement.
+    gyroFactor: 1.2,    // Sensitivity multiplier for the gyroscope.
+    smoothing: 0.1      // Linear interpolation (Lerp) factor for smooth transitions.
   }
 
-  // shallowRef reicht hier aus, da wir keine tiefen Objekte tracken müssen
+  // shallowRef is sufficient here as we only need to track the boolean/null permission state.
   const permissionGranted = shallowRef(null)
 
-  // Aktuelle und Ziel-Werte für die Animation
+  // Tracking current (interpolated) and target (raw) values for the 3D rotation.
   const current = { x: 0, y: 0 }
   const target = { x: 0, y: 0 }
   let rafId = null
   let isAnimating = false
 
   /**
-   * Die Animationsschleife (flüssiger als direkte Events)
+   * The animation loop using requestAnimationFrame.
+   * This is much smoother than updating the DOM directly on every input event.
    */
   const animate = () => {
-    // Lerp-Formel: current + (target - current) * factor
+    // Lerp Formula: current + (target - current) * smoothingFactor
     const dx = target.x - current.x
     const dy = target.y - current.y
 
-    // Wenn die Differenz winzig ist, stoppen wir das Update
+    // Stop the animation if the difference is negligible to save CPU resources.
     if (Math.abs(dx) < 0.01 && Math.abs(dy) < 0.01) {
       if (current.x !== target.x || current.y !== target.y) {
         current.x = target.x
@@ -63,15 +64,15 @@ export function useTilt(elementRef) {
   }
 
   const handleMouseMove = (e) => {
-    // Zielwerte basierend auf Mausposition berechnen (relativ zur Bildschirmmitte)
+    // Calculate target values based on mouse position relative to the screen center.
     const centerX = window.innerWidth / 2
     const centerY = window.innerHeight / 2
 
-    // Wir wollen X-Achse neigen wenn Maus Y bewegt und Y-Achse wenn Maus X bewegt
+    // Cross-axis mapping: moving mouse horizontally (X) rotates around the Y-axis, and vice versa.
     target.y = (e.clientX - centerX) * CONFIG.mouseFactor
     target.x = (centerY - e.clientY) * CONFIG.mouseFactor
 
-    // Begrenzung
+    // Clamp the rotation to the defined maximum angle.
     target.x = clamp(target.x, -CONFIG.maxRotation, CONFIG.maxRotation)
     target.y = clamp(target.y, -CONFIG.maxRotation, CONFIG.maxRotation)
 
@@ -82,8 +83,8 @@ export function useTilt(elementRef) {
     const { beta, gamma } = e
     if (beta === null || gamma === null) return
 
-    // Mobile: Beta ist X-Rotation, Gamma ist Y-Rotation
-    // Wir drosseln die Empfindlichkeit auf mobilen Geräten etwas für mehr Ruhe
+    // On mobile devices: Beta represents X-axis rotation, Gamma represents Y-axis rotation.
+    // We adjust the sensitivity slightly for a calmer user experience on handhelds.
     const nextX = clamp(beta * CONFIG.gyroFactor - 45, -CONFIG.maxRotation, CONFIG.maxRotation)
     const nextY = clamp(gamma * CONFIG.gyroFactor, -CONFIG.maxRotation, CONFIG.maxRotation)
 
@@ -98,8 +99,8 @@ export function useTilt(elementRef) {
     const el = elementRef.value
     if (!el) return
     
-    // Kombinierte Transformation für 3D Effekt
-    // Wir nutzen auch CSS Variablen für Parallax-Effekte in der Komponente
+    // Apply the 3D rotation transform.
+    // We also set CSS custom properties so the component can use them for parallax effects.
     el.style.setProperty('--tilt-x', `${x}deg`)
     el.style.setProperty('--tilt-y', `${y}deg`)
     el.style.transform = `rotateX(${x}deg) rotateY(${y}deg)`

@@ -1,7 +1,8 @@
 <script setup>
 /**
  * @file InstallSection.vue
- * @description Sektion für Download-Optionen mit Lottie-Animationen.
+ * @description This section provides various installation methods for the app 
+ * (GitHub, IzzyOnDroid) and includes animated SVG step-by-step instructions.
  */
 import { useI18n } from 'vue-i18n'
 import { shallowRef } from 'vue'
@@ -82,19 +83,19 @@ const steps = [
             <div class="w-28 h-28 bg-surfaceVariant/10 rounded-[2rem] flex items-center justify-center overflow-hidden border border-border/10 group-hover:scale-110 transition-all duration-500 shadow-inner relative z-10"
                  :class="`group-hover:border-${step.color}/30`">
               
-              <!-- M3E Download Animation -->
+              <!-- Step 1: Download Animation (Bouncing Arrow) -->
               <div v-if="step.type === 'download' && isVisible" class="relative w-16 h-16 flex items-center justify-center">
                 <div class="i-fa6-solid-arrow-down text-4xl text-primary animate-bounce-slow"></div>
                 <div class="absolute bottom-0 w-8 h-1 bg-primary/30 rounded-full animate-pulse"></div>
               </div>
 
-              <!-- M3E Settings Animation -->
+              <!-- Step 2: Settings Animation (Rotating Gear) -->
               <div v-if="step.type === 'settings' && isVisible" class="relative w-16 h-16 flex items-center justify-center">
                 <div class="i-fa6-solid-gear text-4xl text-secondary animate-spin-slow"></div>
                 <div class="absolute inset-0 bg-secondary/10 rounded-full animate-ping-slow"></div>
               </div>
 
-              <!-- M3E Success Animation -->
+              <!-- Step 3: Success Animation (Popping Checkmark) -->
               <div v-if="step.type === 'success' && isVisible" class="relative w-16 h-16 flex items-center justify-center">
                 <div class="i-fa6-solid-check text-4xl text-tertiary animate-m3-pop"></div>
                 <div class="absolute inset-0 flex items-center justify-center">

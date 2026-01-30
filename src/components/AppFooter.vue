@@ -11,17 +11,18 @@ defineOptions({
 
 const { t } = useI18n()
 
-// GitHub Daten holen (Nutzt Shared State aus dem Composable)
+// Fetch GitHub repository data using a shared state composable.
+// This ensures that even if multiple components call this, only one request is made.
 const { latestVersion, releaseDescription, fetchLatestRelease } = useGithubRelease()
 
 const footerRef = shallowRef(null)
 const isVisible = useIntersectionObserver(footerRef, { threshold: 0.1, once: true })
 
-// Modal State
+// State to manage the visibility of the Changelog modal dialog.
 const showChangelog = ref(false)
 
 onMounted(() => {
-  // fetchLatestRelease ist nun sicher mehrfach aufrufbar (Shared State)
+  // Trigger the fetching of the latest release details when the component mounts.
   fetchLatestRelease()
 })
 </script>
@@ -115,7 +116,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Herzschlag Animation */
+/* Heartbeat animation for the 'Made with Love' icon */
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.25); }
@@ -124,7 +125,7 @@ onMounted(() => {
   animation: heartbeat 1.5s ease-in-out infinite;
 }
 
-/* Wackel Animation für den Kaffee */
+/* Wiggle animation for the coffee mug icon */
 @keyframes wiggle {
   0%, 100% { transform: rotate(0deg); }
   25% { transform: rotate(-8deg); }
@@ -132,6 +133,6 @@ onMounted(() => {
 }
 .animate-wiggle {
   animation: wiggle 2s ease-in-out infinite;
-  transform-origin: bottom center; /* Wackelt vom Boden aus */
+  transform-origin: bottom center; /* Pivot point at the bottom of the icon */
 }
 </style>

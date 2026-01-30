@@ -8,7 +8,8 @@
 }
 
 :root {
-  /* --- DARK MODE (Standard) --- */
+  /* --- DARK MODE (Default) --- */
+  /* These are the core colors for the dark theme, following Material 3 guidelines. */
   --c-bg: #0f0d13;
   --c-text-rgb: 230, 225, 229;     /* #E6E1E5 */
   --c-text-dim-rgb: 202, 196, 208; /* #CAC4D0 */
@@ -24,7 +25,8 @@
   --c-accent-rgb: var(--c-accent-rgb-dark, 160, 200, 240);
   --c-on-accent-rgb: 0, 52, 79;
 
-  /* Surface Tones für M3 */
+  /* Surface Tones for Material 3 */
+  /* Used for cards, containers, and backgrounds to create visual hierarchy. */
   --c-surface-rgb: 20, 18, 24;           /* #141218 */
   --c-surface-container-rgb: 30, 28, 36; /* #1E1C24 */
   --c-surface-variant-rgb: 73, 69, 79;   /* #49454F */
@@ -33,6 +35,7 @@
 }
 
 /* --- LIGHT MODE --- */
+/* Applied when the 'light' class is present on the <html> element. */
 html.light {
   --c-bg: #fdf7ff;
   --c-text-rgb: 29, 27, 32;        /* #1d1b20 */
@@ -56,7 +59,8 @@ html.light {
   --c-border-rgb: 121, 116, 126;
 }
 
-/* Variablen Zuweisung */
+/* CSS Variable Assignment */
+/* We map the RGB values to actual color variables for easier use in CSS. */
 :root {
   --c-text: rgb(var(--c-text-rgb));
   --c-text-dim: rgb(var(--c-text-dim-rgb));
@@ -74,6 +78,12 @@ html.light {
   --c-border: rgb(var(--c-border-rgb));
 }
 
+/* Accessibility: Clear focus states for keyboard navigation */
+:focus-visible {
+  outline: 3px solid var(--c-primary);
+  outline-offset: 2px;
+}
+
 body {
   background-color: var(--c-bg);
   color: var(--c-text);
@@ -83,9 +93,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* --- ERGÄNZUNGEN FÜR LAYOUT-KOMPONENTEN --- */
+/* --- ADDITIONAL STYLES FOR LAYOUT COMPONENTS --- */
 
-/* Fix für hässliche Browser-Standard-Links */
+/* Reset for default browser link styling to ensure consistency */
 a {
   color: inherit;
   text-decoration: none;
@@ -98,7 +108,7 @@ a {
   color: var(--c-text);
 }
 
-/* Scrollbar */
+/* Custom Scrollbar Styling (Webkit-based) */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--c-surface); }
 ::-webkit-scrollbar-thumb { 
@@ -110,11 +120,15 @@ a {
   background: rgba(var(--c-primary-rgb), 0.5); 
 }
 
-/* 3D Effekte für Screenshots & Hero */
+/* 3D Visual Effects for Hero and Screenshots Sections */
 .perspective-1000 { perspective: 1000px; }
 .transform-style-3d { transform-style: preserve-3d; }
 
-/* Smartphone Frames (Pixel 10 Pro XL Style) */
+/* 
+ * Smartphone Device Frames.
+ * These styles create a high-fidelity mockup of a Pixel 10 Pro XL, 
+ * including the bezel, screen, and camera cutout.
+ */
 .pixel-frame {
   width: 300px;
   height: 640px;
@@ -157,7 +171,11 @@ a {
   opacity: 0.5;
 }
 
-/* Hilfsklassen für UnoCSS Fallbacks */
+/* 
+ * Utility Helper Classes.
+ * These provide explicit background and text color mappings 
+ * as fallbacks for the UnoCSS design system.
+ */
 .bg-primary { background-color: var(--c-primary); }
 .text-primary { color: var(--c-primary); }
 .bg-surface-container { background-color: var(--c-surface-container); }
