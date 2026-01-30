@@ -4,7 +4,6 @@
  * @description Sektion für Download-Optionen mit Lottie-Animationen.
  */
 import { useI18n } from 'vue-i18n'
-import { Vue3Lottie } from 'vue3-lottie'
 import { shallowRef } from 'vue'
 import { useIntersectionObserver } from '../composables'
 
@@ -16,15 +15,13 @@ const { t } = useI18n()
 const sectionRef = shallowRef(null)
 const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1, once: true })
 
-const base = import.meta.env.BASE_URL
-
 const IZZY_URL = 'https://apt.izzysoft.de/fdroid/index/apk/com.vivi.vivimusic'
 const GITHUB_URL = 'https://github.com/vivizzz007/vivi-music/releases'
 
 const steps = [
-  { id: '1', animLink: `${base}lottie/download.json`.replace(/\/+/g, '/') },
-  { id: '2', animLink: `${base}lottie/settings.json`.replace(/\/+/g, '/') },
-  { id: '3', animLink: `${base}lottie/success.json`.replace(/\/+/g, '/') }
+  { id: '1', type: 'download', color: 'primary' },
+  { id: '2', type: 'settings', color: 'secondary' },
+  { id: '3', type: 'success', color: 'tertiary' }
 ]
 </script>
 
@@ -80,17 +77,31 @@ const steps = [
              :style="{ transitionDelay: `${(index + 2) * 200}ms` }">
 
           <div class="relative mb-6">
-            <div class="absolute -inset-4 bg-primary/10 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-glow-pulse"></div>
-            <div class="w-28 h-28 bg-surfaceVariant/10 rounded-full flex items-center justify-center overflow-hidden border border-border/10 group-hover:scale-110 group-hover:border-primary/30 transition-all duration-500 shadow-inner relative z-10">
-              <Vue3Lottie
-                  v-if="isVisible"
-                  :animationLink="step.animLink"
-                  :height="112"
-                  :width="112"
-                  :loop="step.id !== '3'"
-                  :autoPlay="true"
-                  :pauseOnHover="true"
-              />
+            <div class="absolute -inset-4 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-glow-pulse"
+                 :class="`bg-${step.color}/20`"></div>
+            <div class="w-28 h-28 bg-surfaceVariant/10 rounded-[2rem] flex items-center justify-center overflow-hidden border border-border/10 group-hover:scale-110 transition-all duration-500 shadow-inner relative z-10"
+                 :class="`group-hover:border-${step.color}/30`">
+              
+              <!-- M3E Download Animation -->
+              <div v-if="step.type === 'download' && isVisible" class="relative w-16 h-16 flex items-center justify-center">
+                <div class="i-fa6-solid-arrow-down text-4xl text-primary animate-bounce-slow"></div>
+                <div class="absolute bottom-0 w-8 h-1 bg-primary/30 rounded-full animate-pulse"></div>
+              </div>
+
+              <!-- M3E Settings Animation -->
+              <div v-if="step.type === 'settings' && isVisible" class="relative w-16 h-16 flex items-center justify-center">
+                <div class="i-fa6-solid-gear text-4xl text-secondary animate-spin-slow"></div>
+                <div class="absolute inset-0 bg-secondary/10 rounded-full animate-ping-slow"></div>
+              </div>
+
+              <!-- M3E Success Animation -->
+              <div v-if="step.type === 'success' && isVisible" class="relative w-16 h-16 flex items-center justify-center">
+                <div class="i-fa6-solid-check text-4xl text-tertiary animate-m3-pop"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-full h-full border-2 border-tertiary/30 rounded-full animate-m3-burst"></div>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -116,3 +127,43 @@ const steps = [
     </div>
   </section>
 </template>
+
+<style scoped>
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(-5px) scaleY(1.1); }
+  50% { transform: translateY(10px) scaleY(0.9); }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 4s linear infinite;
+}
+
+@keyframes ping-slow {
+  0% { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+.animate-ping-slow {
+  animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes m3-pop {
+  0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+  70% { transform: scale(1.2) rotate(10deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.animate-m3-pop {
+  animation: m3-pop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes m3-burst {
+  0% { transform: scale(0.5); opacity: 1; border-width: 8px; }
+  100% { transform: scale(2); opacity: 0; border-width: 1px; }
+}
+.animate-m3-burst {
+  animation: m3-burst 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.2s;
+}
+</style>

@@ -16,8 +16,8 @@ The official landing page for **Vivi Music**, an open-source Android music playe
 - **Pixel 10 Pro XL Mockups:** High-fidelity 3D device frames presenting the app's interface in a modern flagship context with realistic camera and depth effects.
 - **Interactive 3D Motion:** An immersive Hero section with smooth 3D tilt effects powered by a Lerp-based smoothing algorithm and parallax depth.
 - **Dynamic Content:** Real-time fetching of the latest version, release notes, and community contributors directly from the GitHub API.
-- **Living Backgrounds:** A dynamic background system with morphing, rotating blobs that create a sense of depth and life (`AppBackground.vue`).
-- **Lottie & Markdown:** Playful vector animations for installation steps and seamless rendering of technical changelogs using `marked`.
+ - **Living Backgrounds:** A dynamic background system with morphing, rotating blobs that create a sense of depth and life (`AppBackground.vue`).
+- **Expressive Motion:** High-energy, CSS-powered SVG animations for installation steps that react to dynamic theme colors.
 - **SEO & Social Presence:** Professional Open Graph and Twitter Card metadata for high-quality previews on Discord, Twitter, and social platforms.
 - **PWA & Homescreen:** Fully installable as a web app (PWA) on mobile devices with custom manifest support and brand-matched theme colors.
 - **Polished UX:** Integrated scroll progress tracking and dynamic scrollbar styling that automatically synchronizes with your chosen accent colors.
@@ -52,7 +52,7 @@ This website is a showcase of the **Material 3 Expressive** guidelines:
 - **Framework:** [Vue.js 3](https://vuejs.org/) (Composition API, `<script setup>`)
 - **Styling:** [UnoCSS](https://unocss.dev/) (Atomic CSS with custom M3E theme tokens)
 - **Icons:** [Iconify](https://iconify.design/) via UnoCSS (FontAwesome 6 Solid/Brands)
-- **Animations:** [Vue3Lottie](https://vue3-lottie.vercel.app/) & CSS Keyframes
+- **Animations:** CSS Keyframes & SVG Transitions (M3E Motion System)
 - **Markdown:** [Marked](https://marked.js.org/) (for rendering changelogs)
 - **Logic:** Custom Composables for Theme, 3D-Tilt, GitHub API, and Intersection Observers.
 
