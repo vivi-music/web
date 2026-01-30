@@ -21,7 +21,7 @@ export default defineConfig({
     'm3-grid-3': 'grid md:grid-cols-3 gap-8',
     
     // Komponenten (OOCSS Objects + Skins)
-    'm3-card': 'rounded-[2.5rem] bg-surface/50 backdrop-blur-xl border border-border/50 transition-all duration-500',
+    'm3-card': 'rounded-[2.5rem] bg-surface/80 md:bg-surface/50 backdrop-blur-md md:backdrop-blur-xl border border-border/50 transition-all duration-500',
     'm3-card-hover': 'hover:-translate-y-3 hover:shadow-2xl',
     'm3-card-expressive': 'm3-card m3-card-hover hover:border-primary/50',
     

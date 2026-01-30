@@ -18,13 +18,21 @@ const AppFooter = defineAsyncComponent(() => import('./components/AppFooter.vue'
 
 const showScrollTop = ref(false)
 const scrollProgress = ref(0)
+let isScrolling = false
 
 const handleScroll = () => {
-  showScrollTop.value = window.scrollY > 500
+  if (isScrolling) return
+  isScrolling = true
   
-  const winScroll = document.body.scrollTop || document.documentElement.scrollTop
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
-  scrollProgress.value = height > 0 ? (winScroll / height) * 100 : 0
+  requestAnimationFrame(() => {
+    showScrollTop.value = window.scrollY > 500
+    
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+    scrollProgress.value = height > 0 ? (winScroll / height) * 100 : 0
+    
+    isScrolling = false
+  })
 }
 
 const scrollToTop = () => {

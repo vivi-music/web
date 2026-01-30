@@ -65,7 +65,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav class="fixed top-0 w-full z-50 backdrop-blur-2xl bg-surface/80 border-b border-border transition-all duration-500">
+  <nav class="fixed top-0 w-full z-50 backdrop-blur-md md:backdrop-blur-2xl bg-surface/90 md:bg-surface/80 border-b border-border transition-all duration-500">
     <div class="m3-container h-24 flex justify-between items-center px-0">
 
       <a href="#" class="flex items-center gap-4 group select-none decoration-none" @click="setActive('')">

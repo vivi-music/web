@@ -23,20 +23,43 @@ export function useTilt(elementRef) {
   const current = { x: 0, y: 0 }
   const target = { x: 0, y: 0 }
   let rafId = null
+  let isAnimating = false
 
   /**
    * Die Animationsschleife (flüssiger als direkte Events)
    */
   const animate = () => {
     // Lerp-Formel: current + (target - current) * factor
-    current.x += (target.x - current.x) * CONFIG.smoothing
-    current.y += (target.y - current.y) * CONFIG.smoothing
+    const dx = target.x - current.x
+    const dy = target.y - current.y
+
+    // Wenn die Differenz winzig ist, stoppen wir das Update
+    if (Math.abs(dx) < 0.01 && Math.abs(dy) < 0.01) {
+      if (current.x !== target.x || current.y !== target.y) {
+        current.x = target.x
+        current.y = target.y
+        updateTransform(current.x, current.y)
+      }
+      isAnimating = false
+      rafId = null
+      return
+    }
+
+    current.x += dx * CONFIG.smoothing
+    current.y += dy * CONFIG.smoothing
 
     if (elementRef.value) {
       updateTransform(current.x, current.y)
     }
 
     rafId = requestAnimationFrame(animate)
+  }
+
+  const startAnimation = () => {
+    if (!isAnimating) {
+      isAnimating = true
+      rafId = requestAnimationFrame(animate)
+    }
   }
 
   const handleMouseMove = (e) => {
@@ -51,6 +74,8 @@ export function useTilt(elementRef) {
     // Begrenzung
     target.x = clamp(target.x, -CONFIG.maxRotation, CONFIG.maxRotation)
     target.y = clamp(target.y, -CONFIG.maxRotation, CONFIG.maxRotation)
+
+    startAnimation()
   }
 
   const handleOrientation = (e) => {
@@ -58,8 +83,15 @@ export function useTilt(elementRef) {
     if (beta === null || gamma === null) return
 
     // Mobile: Beta ist X-Rotation, Gamma ist Y-Rotation
-    target.x = clamp(beta * CONFIG.gyroFactor - 45, -CONFIG.maxRotation, CONFIG.maxRotation) // -45 als Offset für Halte-Winkel
-    target.y = clamp(gamma * CONFIG.gyroFactor, -CONFIG.maxRotation, CONFIG.maxRotation)
+    // Wir drosseln die Empfindlichkeit auf mobilen Geräten etwas für mehr Ruhe
+    const nextX = clamp(beta * CONFIG.gyroFactor - 45, -CONFIG.maxRotation, CONFIG.maxRotation)
+    const nextY = clamp(gamma * CONFIG.gyroFactor, -CONFIG.maxRotation, CONFIG.maxRotation)
+
+    if (Math.abs(target.x - nextX) > 0.5 || Math.abs(target.y - nextY) > 0.5) {
+      target.x = nextX
+      target.y = nextY
+      startAnimation()
+    }
   }
 
   const updateTransform = (x, y) => {
@@ -97,7 +129,6 @@ export function useTilt(elementRef) {
 
   onMounted(() => {
     window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    rafId = requestAnimationFrame(animate)
 
     if (typeof DeviceOrientationEvent !== 'undefined' &&
         typeof DeviceOrientationEvent.requestPermission === 'function') {

@@ -118,8 +118,8 @@ onMounted(() => {
       <div class="perspective-1000 flex justify-center lg:justify-end relative mt-12 lg:mt-0">
         <div class="absolute -inset-4 bg-primary/20 blur-[100px] rounded-full opacity-40 pointer-events-none"></div>
 
-        <div class="animate-float">
-          <div ref="phoneRef" class="pixel-frame m-auto transform-style-3d shadow-2xl">
+        <div class="md:animate-float">
+          <div ref="phoneRef" class="pixel-frame m-auto transform-style-3d shadow-2xl will-change-transform">
             <div class="pixel-camera"></div>
 
             <!-- Glossy Glare Effect -->

@@ -23,8 +23,8 @@ const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.05, once: t
            class="m3-section transition-all duration-1000"
            :class="isVisible ? 'opacity-100' : 'opacity-0 translate-y-20'">
     <!-- Background Decoration -->
-    <div class="absolute top-1/2 left-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full -translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
-    <div class="absolute top-1/2 right-0 w-96 h-96 bg-tertiary/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+    <div class="absolute top-1/2 left-0 w-64 h-64 md:w-96 md:h-96 bg-primary/5 blur-[60px] md:blur-[120px] rounded-full -translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+    <div class="absolute top-1/2 right-0 w-64 h-64 md:w-96 md:h-96 bg-tertiary/5 blur-[60px] md:blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
     <div class="text-center mb-20 relative z-10">
       <h2 class="m3-title mb-4">{{ t('showcase.title') || 'Visual Excellence' }}</h2>
@@ -34,7 +34,7 @@ const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.05, once: t
     <div class="flex flex-wrap justify-center gap-12 px-6 max-w-[1400px] mx-auto relative z-10">
 
       <!-- Screen 1: Home / Discovery -->
-      <div class="pixel-frame hover:-translate-y-4 transition-all duration-700 ease-out group">
+      <div class="pixel-frame hover:-translate-y-4 transition-all duration-700 ease-out group will-change-transform">
         <div class="pixel-camera"></div>
         <div class="pixel-screen bg-surfaceContainer p-5 pt-12 flex flex-col overflow-hidden">
           <div class="flex justify-between items-center mb-8 px-2">
@@ -81,7 +81,7 @@ const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.05, once: t
       </div>
 
       <!-- Screen 2: Now Playing (The centerpiece) -->
-      <div class="pixel-frame hover:-translate-y-4 transition-all duration-700 ease-out delay-75 scale-105 z-20 shadow-primary/20">
+      <div class="pixel-frame hover:-translate-y-4 transition-all duration-700 ease-out delay-75 scale-105 z-20 shadow-primary/20 will-change-transform">
         <div class="pixel-camera"></div>
         <div class="pixel-screen bg-surface p-0 flex flex-col relative overflow-hidden">
           <div class="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-primary/5"></div>
@@ -94,11 +94,11 @@ const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.05, once: t
             </div>
 
             <div class="flex justify-center mb-10 relative">
-              <div class="absolute inset-0 bg-primary/20 blur-2xl rounded-full animate-glow-pulse"></div>
-              <div class="w-48 h-48 rounded-[3rem] bg-gradient-to-tr from-primary via-tertiary to-secondary shadow-2xl shadow-primary/30 animate-float relative z-10 group cursor-pointer overflow-hidden">
+              <div class="absolute inset-0 bg-primary/20 blur-2xl rounded-full md:animate-glow-pulse"></div>
+              <div class="w-48 h-48 rounded-[3rem] bg-gradient-to-tr from-primary via-tertiary to-secondary shadow-2xl shadow-primary/30 md:animate-float relative z-10 group cursor-pointer overflow-hidden">
                 <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div class="w-full h-full flex items-center justify-center">
-                  <div class="i-fa6-solid-music text-5xl text-white/20 animate-spin-slow"></div>
+                  <div class="i-fa6-solid-music text-5xl text-white/20 md:animate-spin-slow"></div>
                 </div>
               </div>
             </div>
